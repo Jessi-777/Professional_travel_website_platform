@@ -1,0 +1,67 @@
+<section id="packages">
+  <div class="text-center">
+    <p class="section-label">Transparent Pricing</p>
+    <h2 class="section-title">Choose Your Package</h2>
+    <p class="section-sub">Fixed prices. No hidden fees. You'll know every deliverable before you pay anything.</p>
+  </div>
+
+  <div class="pkg-grid">
+    <!-- Starter -->
+    <div class="pkg-card">
+      <div class="pkg-tier">Starter</div>
+      <div class="pkg-price">$1,500</div>
+      <div class="pkg-timeline">⏱ 2–3 weeks to launch</div>
+      <div class="pkg-divider"></div>
+      <ul class="pkg-features">
+        <li>Custom homepage design</li>
+        <li>Mobile-responsive layout</li>
+        <li>Contact & inquiry form</li>
+        <li>Domain & hosting setup</li>
+        <li>SSL certificate install</li>
+        <li>Basic SEO configuration</li>
+        <!-- <li>Google Analytics setup</li> -->
+        <li>1 month post launch support</li>
+      </ul>
+      <button class="pkg-btn pkg-btn-default" onclick="scrollTo('contact')">Get Started</button>
+    </div>
+
+    <!-- Professional (Featured) -->
+    <div class="pkg-card featured">
+      <div class="pkg-popular">⭐ Most Popular</div>
+      <div class="pkg-tier">Professional</div>
+      <div class="pkg-price">$1,800</div>
+      <div class="pkg-timeline">⏱ 4–5 weeks to launch</div>
+      <div class="pkg-divider"></div>
+      <ul class="pkg-features">
+        <li>Everything in Starter</li>
+        <li>Destination showcase pages</li>
+        <li>Certifications & awards section</li>
+        <li>Testimonials & reviews section</li>
+        <li>Blog / travel tips section</li>
+        <li>Social media integration</li>
+        <li>Speed & performance optimization</li>
+        <li>3 months post launch support</li>
+      </ul>
+      <button class="pkg-btn pkg-btn-featured" onclick="scrollTo('contact')">Get This Package</button>
+    </div>
+
+    <!-- Premium -->
+    <div class="pkg-card">
+      <div class="pkg-tier">Premium</div>
+      <div class="pkg-price">$2,500</div>
+      <div class="pkg-timeline">⏱ 5–6 weeks to launch</div>
+      <div class="pkg-divider"></div>
+      <ul class="pkg-features">
+        <li>Everything in Professional</li>
+        <li>Custom booking inquiry system</li>
+        <li>Admin dashboard</li>
+        <li>Package management tools</li>
+        <li>Email marketing integration</li>
+        <li>Advanced analytics dashboard</li>
+        <li>6 months ongoing maintenance</li>
+        <li>Priority support & updates</li>
+      </ul>
+      <button class="pkg-btn pkg-btn-default" onclick="scrollTo('contact')">Get Started</button>
+    </div>
+  </div>
+
