@@ -3,6 +3,2022 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Happy Travels · Custom Travel Agency Websites</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+/* ═══════════════════════════════════════════
+   TOKENS
+═══════════════════════════════════════════ */
+:root {
+  --ocean:       #0a4f8c;
+  --ocean-mid:   #1a6bb5;
+  --ocean-light: #3a8fd4;
+  --sky:         #e8f4fd;
+  --foam:        #f4f9ff;
+  --sand:        #fdf8f0;
+  --gold:        #f0a500;
+  --gold-light:  #fbbf24;
+  --coral:       #ff7c5c;
+  --white:       #ffffff;
+  --ink:         #0d2b45;
+  --ink-light:   #1e4060;
+  --muted:       #6b8fa8;
+  --border:      #d4e8f5;
+  --border-soft: #eaf3fb;
+
+  --nav-h: 72px;
+  --r-sm:  8px;
+  --r-md:  16px;
+  --r-lg:  24px;
+  --r-xl:  32px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body { font-family: 'DM Sans', sans-serif; color: var(--ink); background: var(--white); overflow-x: hidden; }
+h1,h2,h3,h4 { font-family: 'Cormorant Garamond', serif; }
+img { display: block; max-width: 100%; }
+a { text-decoration: none; color: inherit; }
+button { font-family: 'DM Sans', sans-serif; cursor: pointer; border: none; }
+
+/* ═══════════════════════════════════════════
+   NAVBAR — PREMIUM FROSTED GLASS
+═══════════════════════════════════════════ */
+#navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  padding: 0 3%;
+  transition: background 0.4s, box-shadow 0.4s, backdrop-filter 0.4s;
+}
+#navbar.scrolled {
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  box-shadow: 0 1px 0 rgba(10,79,140,0.08), 0 4px 32px rgba(10,79,140,0.06);
+}
+
+/* Logo */
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  flex-shrink: 0;
+}
+.nav-logo-mark {
+  width: 38px; height: 38px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--ocean) 0%, var(--ocean-light) 100%);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 17px;
+  box-shadow: 0 2px 12px rgba(10,79,140,0.3);
+  transition: transform 0.2s;
+}
+.nav-logo:hover .nav-logo-mark { transform: rotate(-4deg) scale(1.05); }
+.nav-logo-text {
+  display: flex; flex-direction: column; line-height: 1;
+}
+.nav-logo-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem; font-weight: 700;
+  color: var(--white);
+  transition: color 0.4s;
+  letter-spacing: 0.01em;
+}
+.nav-logo-tagline {
+  font-size: 0.6rem; font-weight: 500;
+  color: rgba(255,255,255,0.55);
+  text-transform: uppercase; letter-spacing: 0.12em;
+  margin-top: 2px;
+  transition: color 0.4s;
+}
+#navbar.scrolled .nav-logo-name    { color: var(--ink); }
+#navbar.scrolled .nav-logo-tagline { color: var(--muted); }
+
+/* Center links */
+.nav-center {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+.nav-link {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.78);
+  padding: 7px 13px;
+  border-radius: 8px;
+  transition: color 0.25s, background 0.25s;
+  position: relative;
+  letter-spacing: 0.01em;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 3px; left: 50%; right: 50%;
+  height: 1.5px;
+  background: var(--gold);
+  border-radius: 2px;
+  transition: left 0.25s, right 0.25s;
+}
+.nav-link:hover::after { left: 13px; right: 13px; }
+.nav-link:hover { color: var(--white); background: rgba(255,255,255,0.08); }
+#navbar.scrolled .nav-link { color: var(--muted); }
+#navbar.scrolled .nav-link:hover { color: var(--ocean); background: var(--sky); }
+#navbar.scrolled .nav-link::after { background: var(--ocean); }
+
+/* Right side */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+.nav-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.7);
+  padding: 5px 11px;
+  border-radius: 50px;
+  border: 1px solid rgba(255,255,255,0.18);
+  transition: color 0.4s, border-color 0.4s;
+}
+.nav-badge-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #4ade80;
+  animation: pulse-dot 2s infinite;
+}
+@keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.8)} }
+#navbar.scrolled .nav-badge { color: var(--muted); border-color: var(--border); }
+
+.nav-cta {
+  background: var(--gold);
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 0.82rem;
+  padding: 9px 20px;
+  border-radius: 50px;
+  letter-spacing: 0.01em;
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+  box-shadow: 0 2px 12px rgba(240,165,0,0.35);
+}
+.nav-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(240,165,0,0.45);
+  background: var(--gold-light);
+}
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+.hamburger:hover { background: rgba(255,255,255,0.1); }
+.hamburger span {
+  display: block; width: 20px; height: 1.5px;
+  background: white; border-radius: 2px;
+  transition: background 0.3s, transform 0.3s;
+}
+#navbar.scrolled .hamburger span { background: var(--ink); }
+.hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* Mobile drawer */
+.nav-drawer {
+  display: none;
+  position: fixed;
+  top: var(--nav-h); left: 0; right: 0;
+  background: rgba(255,255,255,0.97);
+  backdrop-filter: blur(20px);
+  padding: 20px 5% 28px;
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 16px 48px rgba(10,79,140,0.1);
+  z-index: 199;
+  animation: slideDown 0.25s ease;
+}
+.nav-drawer.open { display: block; }
+@keyframes slideDown { from{opacity:0;transform:translateY(-8px)} to{opacity:1;transform:translateY(0)} }
+.nav-drawer a {
+  display: block;
+  padding: 12px 0;
+  font-size: 1rem; font-weight: 500;
+  color: var(--ink);
+  border-bottom: 1px solid var(--border-soft);
+  transition: color 0.2s, padding-left 0.2s;
+}
+.nav-drawer a:hover { color: var(--ocean); padding-left: 6px; }
+.nav-drawer a:last-child { border-bottom: none; }
+.nav-drawer .drawer-cta {
+  margin-top: 16px;
+  display: block; text-align: center;
+  background: var(--ocean); color: white;
+  padding: 13px; border-radius: var(--r-md);
+  font-weight: 700; font-size: 0.95rem;
+}
+
+/* ═══════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════ */
+#hero {
+  min-height: 100vh;
+  background: linear-gradient(155deg, #031d36 0%, #0a4f8c 40%, #1672b8 70%, #2499d6 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: calc(var(--nav-h) + 60px) 5% 80px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero-mesh {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(255,255,255,0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(240,165,0,0.08) 0%, transparent 40%),
+    radial-gradient(ellipse at 60% 80%, rgba(44,181,232,0.1) 0%, transparent 40%);
+}
+.hero-grid {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+}
+.hero-bubbles { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.bubble {
+  position: absolute; border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.12), rgba(255,255,255,0.02));
+  border: 1px solid rgba(255,255,255,0.07);
+  animation: drift linear infinite;
+}
+@keyframes drift {
+  0%   { transform: translateY(0) scale(1); opacity: 0.7; }
+  50%  { opacity: 0.3; }
+  100% { transform: translateY(-140px) scale(1.06); opacity: 0; }
+}
+.hero-content { position: relative; z-index: 2; max-width: 800px; }
+
+.hero-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.18);
+  backdrop-filter: blur(8px);
+  border-radius: 50px;
+  color: rgba(255,255,255,0.9);
+  font-size: 0.78rem; font-weight: 500;
+  padding: 7px 16px;
+  margin-bottom: 30px;
+  animation: fadeUp 0.8s ease both;
+  letter-spacing: 0.02em;
+}
+.hero-pill .dot-green {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #4ade80;
+  animation: pulse-dot 1.8s infinite;
+}
+
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.6rem, 6.5vw, 5rem);
+  font-weight: 700;
+  color: white;
+  line-height: 1.04;
+  margin-bottom: 22px;
+  animation: fadeUp 0.9s 0.1s ease both;
+}
+.hero-title em {
+  font-style: italic;
+  color: #7dd3fc;
+}
+.hero-title .gold { color: var(--gold-light); font-style: normal; }
+
+.hero-sub {
+  font-size: clamp(0.95rem, 2vw, 1.15rem);
+  color: rgba(255,255,255,0.7);
+  line-height: 1.75;
+  max-width: 560px;
+  margin: 0 auto 38px;
+  animation: fadeUp 1s 0.2s ease both;
+}
+
+.hero-actions {
+  display: flex; gap: 12px;
+  justify-content: center; flex-wrap: wrap;
+  animation: fadeUp 1s 0.3s ease both;
+}
+.btn-gold {
+  background: var(--gold);
+  color: var(--ink);
+  font-weight: 700;
+  padding: 14px 32px;
+  border-radius: 50px;
+  font-size: 0.92rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 20px rgba(240,165,0,0.4);
+}
+.btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(240,165,0,0.55); }
+.btn-ghost {
+  background: rgba(255,255,255,0.1);
+  color: white;
+  font-weight: 600;
+  padding: 14px 28px;
+  border-radius: 50px;
+  font-size: 0.92rem;
+  border: 1.5px solid rgba(255,255,255,0.28);
+  transition: background 0.2s, border-color 0.2s;
+}
+.btn-ghost:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.5); }
+
+.hero-stats {
+  display: flex; justify-content: center; gap: 48px;
+  margin-top: 60px;
+  animation: fadeUp 1s 0.5s ease both;
+  flex-wrap: wrap;
+}
+.hero-stat .num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.2rem; font-weight: 700; color: white; line-height: 1;
+}
+.hero-stat .lbl {
+  font-size: 0.72rem; color: rgba(255,255,255,0.55);
+  text-transform: uppercase; letter-spacing: 0.09em; margin-top: 4px;
+}
+.hero-divider {
+  width: 1px; height: 40px;
+  background: rgba(255,255,255,0.15);
+  align-self: center;
+}
+
+.hero-wave {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  line-height: 0; pointer-events: none;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ═══════════════════════════════════════════
+   SHARED SECTION STYLES
+═══════════════════════════════════════════ */
+section { padding: 100px 5%; }
+.section-label {
+  font-size: 0.72rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.14em;
+  color: var(--ocean-light); margin-bottom: 10px;
+  font-family: 'DM Mono', monospace;
+}
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 4vw, 2.9rem);
+  color: var(--ink); line-height: 1.12; margin-bottom: 14px;
+}
+.section-sub {
+  font-size: 0.97rem; color: var(--muted); line-height: 1.75; max-width: 560px;
+}
+.text-center { text-align: center; }
+.text-center .section-sub { margin: 0 auto; }
+
+/* ═══════════════════════════════════════════
+   FEATURES
+═══════════════════════════════════════════ */
+#features { background: var(--foam); }
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+  margin-top: 56px;
+}
+.feature-card {
+  background: white;
+  border-radius: var(--r-lg);
+  padding: 28px 26px;
+  border: 1.5px solid var(--border-soft);
+  transition: transform 0.28s, box-shadow 0.28s, border-color 0.28s;
+  position: relative;
+  overflow: hidden;
+}
+.feature-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--ocean), var(--ocean-light));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s;
+}
+.feature-card:hover::before { transform: scaleX(1); }
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 48px rgba(10,79,140,0.1);
+  border-color: var(--border);
+}
+.feature-icon {
+  font-size: 1.7rem; margin-bottom: 14px;
+  width: 52px; height: 52px;
+  background: var(--sky);
+  border-radius: var(--r-sm);
+  display: flex; align-items: center; justify-content: center;
+}
+.feature-card h3 {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600; font-size: 0.97rem;
+  color: var(--ink); margin-bottom: 8px;
+}
+.feature-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.65; }
+
+/* ═══════════════════════════════════════════
+   MOCKUPS SECTION
+═══════════════════════════════════════════ */
+#examples { background: white; }
+.examples-header {
+  display: flex; align-items: flex-end;
+  justify-content: space-between; gap: 20px;
+  margin-bottom: 56px; flex-wrap: wrap;
+}
+.mockup-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+
+.browser-frame {
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1.5px solid var(--border);
+  box-shadow: 0 12px 56px rgba(10,79,140,0.12);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.browser-frame:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 72px rgba(10,79,140,0.18);
+}
+.browser-bar {
+  background: #f0eeed;
+  padding: 9px 14px;
+  display: flex; align-items: center; gap: 10px;
+  border-bottom: 1px solid #e0dbd5;
+}
+.bm-dots { display: flex; gap: 5px; }
+.bm-dot { width: 10px; height: 10px; border-radius: 50%; }
+.bm-url {
+  flex: 1; background: white; border-radius: 5px;
+  padding: 3px 10px; font-size: 10px; color: #999;
+  font-family: 'DM Mono', monospace; text-align: center;
+}
+
+/* MOCKUP A — Riviera Luxury */
+.ma { background: #faf7f2; font-family: 'DM Sans', sans-serif; }
+.ma-hero {
+  background: linear-gradient(155deg, #1a3a4a 0%, #0d2535 55%, #162e3e 100%);
+  padding: 26px 22px 30px;
+  position: relative; overflow: hidden;
+}
+.ma-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 75% 25%, rgba(212,175,98,0.14), transparent 55%);
+}
+.ma-nav {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 26px; position: relative; z-index: 1;
+}
+.ma-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px; font-weight: 600; color: #d4af62;
+}
+.ma-nav-links { display: flex; gap: 14px; }
+.ma-nav-links span { font-size: 9px; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.07em; }
+.ma-tagline { font-size: 9px; color: #d4af62; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 8px; position: relative; z-index: 1; }
+.ma-headline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 38px; font-weight: 700; color: #fff;
+  line-height: 1.08; margin-bottom: 8px;
+  font-style: italic; position: relative; z-index: 1;
+}
+.ma-headline em { color: #d4af62; font-style: normal; }
+.ma-sub { font-size: 11px; color: rgba(255,255,255,0.48); line-height: 1.6; max-width: 260px; position: relative; z-index: 1; }
+.ma-cta {
+  display: inline-flex; align-items: center; gap: 7px;
+  margin-top: 18px; background: #d4af62; color: #1a3a4a;
+  padding: 9px 20px; border-radius: 2px;
+  font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  position: relative; z-index: 1;
+}
+.ma-body { padding: 22px; }
+.ma-row-label {
+  font-size: 9px; color: #9a8a72; letter-spacing: 0.14em; text-transform: uppercase;
+  margin-bottom: 12px; display: flex; align-items: center; gap: 10px;
+}
+.ma-row-label::after { content: ''; flex: 1; height: 1px; background: #e0d8cc; }
+.ma-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 14px; }
+.ma-card {
+  background: white; border: 1px solid #e8e0d4;
+  border-radius: 6px; overflow: hidden;
+}
+.ma-card-img { height: 60px; display: flex; align-items: center; justify-content: center; font-size: 26px; }
+.ma-c-sant { background: linear-gradient(135deg,#87ceeb,#4682b4); }
+.ma-c-am   { background: linear-gradient(135deg,#5f9ea0,#2e8b57); }
+.ma-c-dub  { background: linear-gradient(135deg,#deb887,#d2691e); }
+.ma-card-info { padding: 8px 10px; }
+.ma-card-name  { font-size: 11px; font-weight: 600; color: #2a2520; }
+.ma-card-price { font-size: 10px; color: #9a8a72; margin-top: 1px; }
+.ma-strip {
+  background: #1a3a4a; border-radius: 6px; padding: 10px 14px;
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 14px;
+}
+.ma-strip-txt { font-size: 10px; color: rgba(255,255,255,0.6); }
+.ma-strip-act { font-size: 10px; color: #d4af62; font-weight: 600; }
+.ma-trust { display: flex; border-top: 1px solid #e8e0d4; }
+.ma-trust-item {
+  flex: 1; padding: 12px 10px; text-align: center;
+  border-right: 1px solid #e8e0d4;
+}
+.ma-trust-item:last-child { border-right: none; }
+.ma-trust-num { font-family: 'Cormorant Garamond', serif; font-size: 20px; color: #1a3a4a; font-weight: 700; }
+.ma-trust-lbl { font-size: 8px; color: #9a8a72; margin-top: 2px; }
+
+/* MOCKUP B — Ultra Modern */
+.mb { background: #080810; font-family: 'DM Sans', sans-serif; }
+.mb-hero {
+  background: #080810;
+  padding: 20px 20px 26px;
+  position: relative; overflow: hidden; min-height: 210px;
+}
+.mb-g1 {
+  position: absolute; width: 260px; height: 260px; border-radius: 50%;
+  filter: blur(64px); background: rgba(99,102,241,0.38);
+  top: -70px; right: -50px; pointer-events: none;
+}
+.mb-g2 {
+  position: absolute; width: 180px; height: 180px; border-radius: 50%;
+  filter: blur(50px); background: rgba(236,72,153,0.26);
+  bottom: -30px; left: 10px; pointer-events: none;
+}
+.mb-nav {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 24px; position: relative; z-index: 1;
+}
+.mb-logo { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 700; color: #fff; letter-spacing: 0.08em; }
+.mb-logo span { color: #818cf8; }
+.mb-pill {
+  background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 20px; padding: 4px 12px;
+  font-size: 9px; color: rgba(255,255,255,0.6);
+}
+.mb-eye { font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: #818cf8; margin-bottom: 5px; position: relative; z-index: 1; }
+.mb-headline { font-family: 'DM Sans', sans-serif; font-size: 30px; font-weight: 800; color: #fff; line-height: 1.1; position: relative; z-index: 1; }
+.mb-headline span {
+  background: linear-gradient(90deg, #818cf8, #ec4899);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.mb-sub { font-size: 10px; color: rgba(255,255,255,0.38); margin-top: 7px; line-height: 1.55; position: relative; z-index: 1; }
+.mb-btns { display: flex; gap: 8px; margin-top: 16px; position: relative; z-index: 1; }
+.mb-btn-p {
+  background: linear-gradient(90deg,#818cf8,#a78bfa); color: #fff; border: none;
+  padding: 8px 16px; border-radius: 20px; font-size: 10px; font-weight: 600;
+}
+.mb-btn-g {
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.13);
+  color: rgba(255,255,255,0.65); padding: 8px 16px; border-radius: 20px; font-size: 10px;
+}
+.mb-body { padding: 16px 20px 0; }
+.mb-slabel {
+  font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(255,255,255,0.25); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 8px;
+}
+.mb-slabel::after { content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.06); }
+.mb-dest-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 7px; margin-bottom: 14px; }
+.mb-dest { border-radius: 9px; overflow: hidden; border: 1px solid rgba(255,255,255,0.06); }
+.mb-dest-vis { height: 70px; display: flex; align-items: flex-end; padding: 0 7px 6px; }
+.mb-d-bali     { background: linear-gradient(160deg,#134e5e,#71b280); }
+.mb-d-maldives { background: linear-gradient(160deg,#006994,#00b4d8); }
+.mb-d-kyoto    { background: linear-gradient(160deg,#3d0008,#c0392b); }
+.mb-dest-tag { background: rgba(0,0,0,0.45); border-radius: 3px; padding: 2px 6px; font-size: 8px; color: rgba(255,255,255,0.88); }
+.mb-dest-info { background: #10101a; padding: 7px 9px; }
+.mb-dest-name  { font-size: 11px; font-weight: 600; color: #e2e8f0; }
+.mb-dest-img {
+  width: 100%; height: 48px; object-fit: cover;
+  display: block; border-radius: 4px; margin-bottom: 6px;
+}
+.mb-dest-price { font-size: 9px; color: #818cf8; margin-top: 1px; }
+.mb-pkgs { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+.mb-pkg { background: #10101a; border: 1px solid rgba(255,255,255,0.07); border-radius: 9px; padding: 12px; }
+.mb-pkg.mb-feat { border-color: #818cf8; background: linear-gradient(135deg,rgba(129,140,248,0.1),rgba(167,139,250,0.04)); }
+.mb-pkg-lbl { font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.28); margin-bottom: 3px; }
+.mb-pkg.mb-feat .mb-pkg-lbl { color: #818cf8; }
+.mb-pkg-name  { font-size: 13px; font-weight: 700; color: #e2e8f0; }
+.mb-pkg-price { font-size: 22px; font-weight: 800; color: #fff; margin-top: 2px; }
+.mb-pkg-price span { font-size: 11px; color: rgba(255,255,255,0.32); font-weight: 400; }
+.mb-feats { margin-top: 8px; }
+.mb-feat-row { font-size: 9px; color: rgba(255,255,255,0.45); margin: 3px 0; display: flex; align-items: center; gap: 5px; }
+.mb-dot-c { width: 7px; height: 7px; border-radius: 50%; background: #818cf8; flex-shrink: 0; }
+.mb-pkg.mb-feat .mb-dot-c { background: #a78bfa; }
+.mb-strip {
+  background: linear-gradient(90deg,rgba(129,140,248,0.12),rgba(236,72,153,0.08));
+  border-top: 1px solid rgba(129,140,248,0.15);
+  padding: 10px 20px; margin-top: 16px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.mb-strip-txt { font-size: 10px; color: rgba(255,255,255,0.5); }
+.mb-strip-arr { font-size: 10px; color: #818cf8; font-weight: 700; }
+
+/* Mockup labels */
+.mockup-labels { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 14px; }
+.ml-name { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 5px; font-family: 'DM Sans', sans-serif; }
+.ml-badge {
+  display: inline-block;
+  font-size: 11px; font-weight: 500; padding: 4px 11px; border-radius: 50px;
+}
+.badge-luxury { background: #f0ede4; color: #5a4420; }
+.badge-modern { background: #eeeef8; color: #3d3d8a; }
+
+/* ═══════════════════════════════════════════
+   PACKAGES
+═══════════════════════════════════════════ */
+#packages { background: #f0f6ff; }
+
+.pkg-wrap {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin-top: 56px;
+  align-items: start;
+}
+
+.pc {
+  background: white;
+  border-radius: var(--r-xl);
+  border: 1.5px solid var(--border-soft);
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+}
+.pc:hover { transform: translateY(-6px); box-shadow: 0 20px 56px rgba(10,79,140,0.12); }
+.pc.pc-pop {
+  border-color: var(--ocean);
+  box-shadow: 0 8px 40px rgba(10,79,140,0.16);
+  transform: translateY(-4px);
+}
+.pc.pc-pop:hover { transform: translateY(-10px); box-shadow: 0 28px 64px rgba(10,79,140,0.2); }
+
+.pc-badge {
+  position: absolute; top: 16px; right: 16px;
+  background: var(--gold); color: #4a2800;
+  font-size: 0.66rem; font-weight: 700;
+  padding: 4px 11px; border-radius: 50px;
+}
+
+.pc-head {
+  padding: 28px 28px 22px;
+  border-bottom: 1px solid var(--border-soft);
+}
+.pc-pop .pc-head {
+  background: linear-gradient(140deg, var(--ocean) 0%, #1a7bc4 100%);
+  border-bottom: none;
+}
+.pc-tier {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem; font-weight: 500;
+  text-transform: uppercase; letter-spacing: 0.12em;
+  color: var(--ocean-light); margin-bottom: 10px;
+}
+.pc-pop .pc-tier { color: rgba(255,255,255,0.6); }
+
+.pc-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.8rem; font-weight: 700;
+  color: var(--ink); line-height: 1;
+}
+.pc-pop .pc-price { color: white; }
+.pc-note { font-size: 0.8rem; color: var(--muted); margin-top: 6px; line-height: 1.5; }
+.pc-pop .pc-note { color: rgba(255,255,255,0.65); }
+.pc-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+.pc-pill {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 0.7rem; font-weight: 500;
+  background: var(--sky); color: var(--ocean);
+  padding: 4px 10px; border-radius: 50px; border: 1px solid var(--border);
+}
+.pc-pop .pc-pill { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.2); color: rgba(255,255,255,0.88); }
+
+.pc-feats { padding: 4px 28px 6px; flex: 1; }
+.pc-feat {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 12px 0; border-bottom: 1px solid #f0f6fb;
+}
+.pc-feat:last-child { border-bottom: none; }
+.pc-feat-dot {
+  flex-shrink: 0; margin-top: 1px;
+  width: 20px; height: 20px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.68rem; font-weight: 800;
+}
+.dot-yes { background: #dbeafe; color: var(--ocean); }
+.dot-pop { background: rgba(10,79,140,0.12); color: var(--ocean); }
+.dot-no  { background: #f1f5f9; color: #c0cfe0; }
+.pc-feat-label { font-size: 0.86rem; font-weight: 500; color: var(--ink); }
+.pc-feat-label.dim { color: #b0c4d8; }
+.pc-feat-sub { font-size: 0.75rem; color: var(--muted); display: block; margin-top: 1px; line-height: 1.4; }
+
+.pc-foot { padding: 18px 28px 26px; }
+.pc-btn {
+  display: block; width: 100%; text-align: center;
+  padding: 13px; border-radius: 50px;
+  font-size: 0.88rem; font-weight: 700;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.pc-btn:hover { transform: translateY(-2px); }
+.btn-ocean { background: var(--ocean); color: white; }
+.btn-ocean:hover { box-shadow: 0 6px 20px rgba(10,79,140,0.35); }
+.btn-pop   { background: var(--gold); color: #3d2000; }
+.btn-pop:hover { box-shadow: 0 6px 20px rgba(240,165,0,0.5); }
+
+.trust-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 18px; margin-top: 44px;
+  background: white; border-radius: var(--r-lg);
+  padding: 28px; border: 1.5px solid var(--border-soft);
+}
+.trust-item { display: flex; align-items: flex-start; gap: 12px; }
+.trust-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 2px; }
+.trust-item h4 { font-size: 0.87rem; font-weight: 600; color: var(--ink); margin-bottom: 3px; font-family: 'DM Sans', sans-serif; }
+.trust-item p  { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+
+/* ═══════════════════════════════════════════
+   PROCESS
+═══════════════════════════════════════════ */
+#process { background: white; }
+.process-wrap {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0; margin-top: 60px;
+  position: relative;
+}
+.process-wrap::before {
+  content: '';
+  position: absolute; top: 28px; left: 12%; right: 12%;
+  height: 1.5px;
+  background: linear-gradient(90deg, var(--ocean-light), var(--sky));
+  z-index: 0;
+}
+.ps { text-align: center; padding: 0 16px; position: relative; z-index: 1; }
+.ps-num {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: var(--ocean); color: white;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 18px;
+  box-shadow: 0 4px 20px rgba(10,79,140,0.3);
+}
+.ps-week {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem; font-weight: 500;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--ocean-light); margin-bottom: 7px;
+}
+.ps h4 { font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 0.95rem; color: var(--ink); margin-bottom: 8px; }
+.ps p  { font-size: 0.82rem; color: var(--muted); line-height: 1.65; }
+
+/* ═══════════════════════════════════════════
+   ABOUT
+═══════════════════════════════════════════ */
+#about { background: white; padding-top: 110px; }
+.about-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
+
+.about-card {
+  background: linear-gradient(145deg, #0a4f8c, #1a7bc4 60%, #2cb5e8 100%);
+  border-radius: var(--r-xl);
+  padding: 40px 36px 36px;
+  color: white; position: relative; overflow: hidden;
+  box-shadow: 0 20px 60px rgba(10,79,140,0.25);
+}
+.about-card::before {
+  content: ''; position: absolute;
+  top: -50px; right: -50px; width: 200px; height: 200px;
+  border-radius: 50%; background: rgba(255,255,255,0.05);
+}
+.about-av-row { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; position: relative; z-index: 1; }
+.about-av {
+  width: 62px; height: 62px; border-radius: 50%;
+  background: rgba(255,255,255,0.18);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.8rem;
+  border: 2px solid rgba(255,255,255,0.32);
+}
+.about-av-name { font-weight: 700; font-size: 0.97rem; color: white; }
+.about-av-role { font-size: 0.75rem; color: rgba(255,255,255,0.62); margin-top: 2px; }
+.about-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem; font-style: italic;
+  line-height: 1.68; color: rgba(255,255,255,0.9);
+  border-left: 3px solid rgba(255,255,255,0.28);
+  padding-left: 16px; margin-bottom: 26px;
+  position: relative; z-index: 1;
+}
+.about-chips { display: flex; flex-wrap: wrap; gap: 8px; position: relative; z-index: 1; }
+.chip {
+  background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2);
+  color: white; font-size: 0.72rem; font-weight: 500;
+  padding: 5px 13px; border-radius: 50px;
+}
+.about-stats {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 12px; margin-top: 16px;
+}
+.about-stat-box {
+  background: var(--sky); border-radius: var(--r-md);
+  padding: 18px 14px; text-align: center;
+  border: 1.5px solid var(--border);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.about-stat-box:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(10,79,140,0.1); }
+.stat-num { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 700; color: var(--ocean); line-height: 1; }
+.stat-lbl { font-size: 0.7rem; color: var(--muted); margin-top: 4px; line-height: 1.3; }
+
+.about-content { padding-top: 6px; }
+.about-lead { font-size: 0.97rem; color: var(--muted); line-height: 1.82; margin-bottom: 28px; }
+.about-list { list-style: none; display: flex; flex-direction: column; gap: 0; }
+.about-list li {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 14px 0; border-bottom: 1px solid #eef5fb;
+}
+.about-list li:last-child { border-bottom: none; }
+.a-check-icon {
+  width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0;
+  background: #dbeafe;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.72rem; font-weight: 800; color: var(--ocean);
+  margin-top: 1px;
+}
+.a-list-text strong { display: block; font-size: 0.9rem; font-weight: 600; color: var(--ink); margin-bottom: 2px; }
+.a-list-text span   { font-size: 0.82rem; color: var(--muted); line-height: 1.55; }
+.about-cta-row { display: flex; align-items: center; gap: 16px; margin-top: 28px; flex-wrap: wrap; }
+.btn-solid {
+  background: var(--ocean); color: white; font-weight: 700;
+  padding: 13px 28px; border-radius: 50px; font-size: 0.9rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn-solid:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(10,79,140,0.35); }
+.about-cta-note { font-size: 0.8rem; color: var(--muted); }
+
+/* ═══════════════════════════════════════════
+   CONTACT
+═══════════════════════════════════════════ */
+#contact {
+  background: linear-gradient(135deg, #021e36 0%, #0a4f8c 100%);
+}
+.contact-wrap { display: grid; grid-template-columns: 1fr 1.2fr; gap: 64px; align-items: start; }
+.contact-info h2 { color: white; margin-bottom: 16px; }
+.contact-info p { color: rgba(255,255,255,0.62); font-size: 0.95rem; line-height: 1.78; margin-bottom: 28px; }
+.contact-perks { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.contact-perks li { display: flex; align-items: center; gap: 10px; color: rgba(255,255,255,0.78); font-size: 0.9rem; }
+.perk-ico { font-size: 1rem; }
+
+.cform-card { background: white; border-radius: var(--r-xl); padding: 38px; }
+.cform-card h3 { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 1.1rem; color: var(--ink); margin-bottom: 24px; }
+.frow { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.fg { margin-bottom: 14px; }
+.fg label { display: block; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 6px; }
+.fg input, .fg select, .fg textarea {
+  width: 100%; border: 1.5px solid var(--border);
+  border-radius: var(--r-sm); padding: 11px 14px;
+  font-size: 0.9rem; font-family: 'DM Sans', sans-serif;
+  color: var(--ink); outline: none; background: white;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.fg input:focus, .fg select:focus, .fg textarea:focus {
+  border-color: var(--ocean-light);
+  box-shadow: 0 0 0 3px rgba(26,107,181,0.1);
+}
+.fg textarea { resize: none; min-height: 88px; }
+.fsub {
+  width: 100%; padding: 14px; border-radius: 50px;
+  background: var(--ocean); color: white;
+  font-size: 0.93rem; font-weight: 700;
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+.fsub:hover { background: var(--ocean-mid); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(10,79,140,0.4); }
+.fnote { text-align: center; font-size: 0.74rem; color: var(--muted); margin-top: 10px; }
+.success-msg {
+  display: none;
+  background: #f0fdf4; border: 1.5px solid #86efac;
+  border-radius: var(--r-md); padding: 20px; text-align: center; margin-top: 14px;
+}
+.success-msg.show { display: block; }
+.success-msg p { color: #166534; font-size: 0.9rem; font-weight: 500; }
+
+/* ═══════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════ */
+footer {
+  background: #021e36; color: rgba(255,255,255,0.45);
+  padding: 28px 5%; text-align: center;
+  font-size: 0.8rem; border-top: 1px solid rgba(255,255,255,0.07);
+}
+footer strong { color: rgba(255,255,255,0.78); }
+
+/* ═══════════════════════════════════════════
+   PARTNERS & CERTIFICATIONS
+═══════════════════════════════════════════ */
+#partners { background: #eef4fc; }
+
+.partners-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+  margin-top: 56px;
+}
+
+/* Phone shell */
+.phone-shell {
+  max-width: 360px;
+  margin: 0 auto;
+  background: #eef3fb;
+  border-radius: 36px;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 8px #1a1a2e,
+    0 0 0 10px #2a2a4e,
+    0 32px 72px rgba(0,0,0,0.3);
+}
+.phone-status {
+  background: #eef3fb;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 22px 4px;
+  font-size: 11px; font-weight: 600; color: var(--ink);
+}
+.phone-scroll {
+  height: 680px; overflow-y: auto;
+  padding-bottom: 24px; scrollbar-width: none;
+}
+.phone-scroll::-webkit-scrollbar { display: none; }
+
+/* Phone header */
+.ph-header {
+  padding: 10px 18px 0;
+  display: flex; align-items: center; gap: 10px;
+}
+.ph-back {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: white; border: 1.5px solid #d8e4f5;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; flex-shrink: 0;
+}
+.ph-title-block { flex: 1; }
+.ph-pretitle { font-size: 10px; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+.ph-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 700; color: var(--ink); line-height: 1.1; }
+.ph-avatar {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--ocean), var(--ocean-light));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; flex-shrink: 0;
+  box-shadow: 0 3px 10px rgba(10,79,140,0.3);
+}
+
+/* Phone tabs */
+.ph-tabs {
+  margin: 12px 18px 0;
+  background: white; border-radius: 50px; padding: 4px;
+  display: flex;
+  box-shadow: 0 2px 10px rgba(10,79,140,0.08);
+}
+.ph-tab {
+  flex: 1; text-align: center; padding: 9px 0;
+  border-radius: 50px; font-size: 13px; font-weight: 600;
+  cursor: pointer; color: var(--muted);
+  transition: background 0.25s, color 0.25s, box-shadow 0.25s;
+}
+.ph-tab.ph-active {
+  background: var(--ocean); color: white;
+  box-shadow: 0 4px 14px rgba(10,79,140,0.3);
+}
+
+/* Phone filters */
+.ph-filters {
+  padding: 12px 18px 0;
+  display: flex; flex-wrap: wrap; gap: 6px;
+}
+.ph-chip {
+  padding: 6px 13px; border-radius: 50px;
+  font-size: 12px; font-weight: 500; cursor: pointer;
+  border: 1.5px solid #d8e4f5; background: white;
+  color: var(--ink-light); transition: all 0.2s;
+  white-space: nowrap;
+}
+.ph-chip.ph-chip-active {
+  background: var(--ocean); color: white;
+  border-color: var(--ocean);
+  box-shadow: 0 3px 10px rgba(10,79,140,0.28);
+}
+
+/* Section row label */
+.ph-slabel {
+  margin: 14px 18px 8px;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; font-weight: 500;
+  text-transform: uppercase; letter-spacing: 0.12em;
+  color: var(--muted);
+  display: flex; align-items: center; gap: 8px;
+}
+.ph-slabel::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+/* Partner card */
+.ph-pcard {
+  margin: 0 18px 12px;
+  background: white; border-radius: 14px; padding: 16px;
+  border: 1.5px solid #d8e4f5;
+  box-shadow: 0 2px 12px rgba(10,79,140,0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer; position: relative; overflow: hidden;
+}
+.ph-pcard::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+  width: 3px; background: var(--ocean); border-radius: 3px 0 0 3px;
+  transform: scaleY(0); transform-origin: bottom; transition: transform 0.25s;
+}
+.ph-pcard:hover::before { transform: scaleY(1); }
+.ph-pcard:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(10,79,140,0.12); }
+
+.ph-pcard-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+.ph-logo {
+  width: 46px; height: 46px; border-radius: 11px;
+  background: #eef3fb; border: 1.5px solid #d8e4f5;
+  display: flex; align-items: center; justify-content: center; font-size: 24px;
+}
+.ph-badges { display: flex; gap: 5px; flex-wrap: wrap; justify-content: flex-end; }
+.ph-badge-type {
+  padding: 3px 9px; border-radius: 50px; font-size: 10px; font-weight: 500;
+  background: #eef3fb; color: var(--ink-light); border: 1.5px solid #d8e4f5;
+}
+.ph-badge-cert {
+  padding: 3px 9px; border-radius: 50px; font-size: 10px; font-weight: 600;
+  background: #e8f8f1; color: #1db87e; border: 1.5px solid #b8ecd7;
+}
+.ph-pname {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 19px; font-weight: 700; color: var(--ink); margin-bottom: 3px;
+}
+.ph-ptag { font-size: 11px; color: var(--muted); margin-bottom: 10px; line-height: 1.4; }
+.ph-stars { display: flex; align-items: center; gap: 2px; margin-bottom: 8px; }
+.ph-star { color: var(--gold); font-size: 11px; }
+.ph-rating { font-size: 10px; color: var(--muted); margin-left: 4px; }
+.ph-comm {
+  display: inline-flex; align-items: center; gap: 4px;
+  background: #fff8e6; border: 1.5px solid #f5d88a;
+  color: #8a5c00; border-radius: 50px;
+  font-size: 10px; font-weight: 600;
+  padding: 3px 9px; margin-bottom: 10px;
+}
+.ph-code-row { display: flex; gap: 7px; margin-bottom: 10px; }
+.ph-code-box {
+  flex: 1; background: #eef3fb; border: 1.5px solid #d8e4f5;
+  border-radius: 8px; padding: 9px 12px;
+  font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 500;
+  color: var(--ocean); letter-spacing: 0.04em;
+  display: flex; align-items: center;
+}
+.ph-copy-btn {
+  background: var(--ocean); color: white; border: none;
+  border-radius: 8px; padding: 0 14px;
+  font-size: 11px; font-weight: 700; font-family: 'DM Sans', sans-serif;
+  cursor: pointer; min-height: 38px;
+  box-shadow: 0 3px 10px rgba(10,79,140,0.28);
+  transition: background 0.2s, transform 0.15s;
+  white-space: nowrap;
+}
+.ph-copy-btn:hover { background: var(--ocean-mid); transform: translateY(-1px); }
+.ph-copy-btn.copied { background: #1db87e; }
+.ph-book { font-size: 13px; font-weight: 600; color: var(--ocean); display: flex; align-items: center; gap: 4px; transition: gap 0.2s; }
+.ph-book:hover { gap: 8px; }
+
+/* Phone bottom nav */
+.phone-bottom-nav {
+  background: white; border-top: 1.5px solid #d8e4f5;
+  padding: 10px 18px 18px;
+  display: flex; justify-content: space-around;
+}
+.pbn-item {
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+  font-size: 9px; font-weight: 500; color: var(--muted); cursor: pointer;
+}
+.pbn-item.pbn-active { color: var(--ocean); }
+.pbn-icon { font-size: 18px; }
+
+/* Cert cards in phone */
+.ph-cert-intro {
+  margin: 14px 18px 12px;
+  background: linear-gradient(135deg, var(--ocean), var(--ocean-light));
+  border-radius: 14px; padding: 16px; color: white;
+}
+.ph-cert-intro-lbl { font-size: 9px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 3px; }
+.ph-cert-intro-title { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 700; }
+.ph-cert-intro-sub { font-size: 11px; color: rgba(255,255,255,0.68); margin-top: 3px; }
+.ph-cert-card {
+  margin: 0 18px 10px; background: white; border-radius: 12px;
+  padding: 13px; border: 1.5px solid #d8e4f5;
+  display: flex; align-items: center; gap: 12px;
+  box-shadow: 0 2px 8px rgba(10,79,140,0.05);
+}
+.ph-cert-icon {
+  width: 42px; height: 42px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0;
+}
+.ph-cert-body { flex: 1; }
+.ph-cert-name { font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 2px; }
+.ph-cert-sub  { font-size: 11px; color: var(--muted); line-height: 1.3; }
+.ph-cert-badge {
+  padding: 4px 10px; border-radius: 50px; font-size: 10px; font-weight: 600;
+  display: flex; align-items: center; gap: 3px; flex-shrink: 0; white-space: nowrap;
+}
+.cert-ok      { background: #e8f8f1; color: #1db87e; border: 1.5px solid #b8ecd7; }
+.cert-pend    { background: #fff8e6; color: #8a5c00; border: 1.5px solid #f5d88a; }
+
+/* Right side description */
+.partners-desc { padding-top: 8px; }
+.partners-desc .section-title { margin-bottom: 14px; }
+.partners-lead { font-size: 0.97rem; color: var(--muted); line-height: 1.82; margin-bottom: 28px; }
+.partners-perks { list-style: none; display: flex; flex-direction: column; gap: 0; }
+.partners-perks li {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 14px 0; border-bottom: 1px solid #eef5fb;
+}
+.partners-perks li:last-child { border-bottom: none; }
+.perk-check {
+  width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0;
+  background: #dbeafe; display: flex; align-items: center; justify-content: center;
+  font-size: 0.7rem; font-weight: 800; color: var(--ocean); margin-top: 1px;
+}
+.perk-text strong { display: block; font-size: 0.9rem; font-weight: 600; color: var(--ink); margin-bottom: 2px; }
+.perk-text span   { font-size: 0.82rem; color: var(--muted); line-height: 1.55; }
+.partners-cta-row { display: flex; align-items: center; gap: 14px; margin-top: 28px; flex-wrap: wrap; }
+.partners-cta-note { font-size: 0.8rem; color: var(--muted); }
+
+@media (max-width: 900px) {
+  .partners-layout { grid-template-columns: 1fr; }
+  .partners-desc { order: -1; }
+}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .pkg-wrap { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
+  .pc.pc-pop { transform: none; }
+  .pc.pc-pop:hover { transform: translateY(-6px); }
+}
+@media (max-width: 900px) {
+  .nav-center, .nav-badge { display: none; }
+  .hamburger { display: flex; }
+  .about-wrap { grid-template-columns: 1fr; gap: 36px; }
+  .contact-wrap { grid-template-columns: 1fr; gap: 36px; }
+  .mockup-grid, .mockup-labels { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  section { padding: 72px 5%; }
+  .frow { grid-template-columns: 1fr; }
+  .process-wrap::before { display: none; }
+  .process-wrap { grid-template-columns: 1fr 1fr; }
+  .hero-stat .num { font-size: 1.8rem; }
+  .hero-divider { display: none; }
+  .hero-stats { gap: 28px; }
+}
+@media (max-width: 480px) {
+  .process-wrap { grid-template-columns: 1fr; }
+  .hero-title { font-size: 2.2rem; }
+  .cform-card { padding: 26px 22px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAVBAR ═══ -->
+<nav id="navbar">
+  <!-- Logo -->
+  <a href="#hero" class="nav-logo" onclick="smoothTo('hero')">
+    <div class="nav-logo-mark">✈️</div>
+    <div class="nav-logo-text">
+      <span class="nav-logo-name">Happy Travels</span>
+      <span class="nav-logo-tagline">Jessi's Software Engineer Studio</span>
+    </div>
+  </a>
+
+  <!-- Center nav links -->
+  <div class="nav-center">
+    <a class="nav-link" href="#features" onclick="smoothTo('features')">Features</a>
+    <a class="nav-link" href="#examples" onclick="smoothTo('examples')">Preview</a>
+    <a class="nav-link" href="#packages" onclick="smoothTo('packages')">Packages</a>
+    <a class="nav-link" href="#process"   onclick="smoothTo('process')">Process</a>
+    <a class="nav-link" href="#partners"  onclick="smoothTo('partners')">Partners</a>
+    <a class="nav-link" href="#about"     onclick="smoothTo('about')">About</a>
+  </div>
+
+  <!-- Right side -->
+  <div class="nav-right">
+    <div class="nav-badge">
+      <div class="nav-badge-dot"></div>
+      Accepting clients
+    </div>
+    <a class="nav-cta" href="#contact" onclick="smoothTo('contact')">Let's Talk →</a>
+  </div>
+
+  <!-- Hamburger -->
+  <div class="hamburger" id="ham" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- Mobile drawer -->
+<div class="nav-drawer" id="drawer">
+  <a href="#features" onclick="smoothTo('features');closeMenu()">Features</a>
+  <a href="#examples" onclick="smoothTo('examples');closeMenu()">Preview</a>
+  <a href="#packages" onclick="smoothTo('packages');closeMenu()">Packages</a>
+  <a href="#process"  onclick="smoothTo('process');closeMenu()">Process</a>
+  <a href="#partners" onclick="smoothTo('partners');closeMenu()">Partners</a>
+  <a href="#about"    onclick="smoothTo('about');closeMenu()">About</a>
+  <a href="#contact"  class="drawer-cta" onclick="smoothTo('contact');closeMenu()">Let's Talk →</a>
+</div>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero">
+  <div class="hero-mesh"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-bubbles" id="bubbles"></div>
+
+  <div class="hero-content">
+    <div class="hero-pill">
+      <span class="dot-green"></span>
+      Proposal Prepared Just for You
+    </div>
+
+    <h1 class="hero-title">
+      Your Travel Agency<br/>
+      Deserves a<br/>
+      <em>Beautiful Website</em>
+    </h1>
+
+    <p class="hero-sub">
+      A custom, mobile-ready website that showcases your destinations, builds trust with travelers, and turns every visitor into a paying client.
+    </p>
+
+    <div class="hero-actions">
+      <button class="btn-gold" onclick="smoothTo('packages')">See Packages →</button>
+      <button class="btn-ghost" onclick="smoothTo('examples')">View Designs</button>
+    </div>
+
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="num">100%</div>
+        <div class="lbl">Mobile Ready</div>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat">
+        <div class="num">2–6</div>
+        <div class="lbl">Weeks to Launch</div>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat">
+        <div class="num">$1,500</div>
+        <div class="lbl">Starting Price</div>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat">
+        <div class="num">5★</div>
+        <div class="lbl">Client Rating</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-wave">
+    <svg viewBox="0 0 1440 90" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" width="100%" height="90">
+      <path d="M0,40 C360,90 720,0 1080,50 C1260,75 1380,30 1440,40 L1440,90 L0,90 Z" fill="white"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ═══ FEATURES ═══ -->
+<section id="features">
+  <div class="text-center">
+    <p class="section-label">What's Included</p>
+    <h2 class="section-title">Everything Your Agency<br/>Website Needs</h2>
+    <p class="section-sub">No surprise add-on fees. Every feature below is included in your chosen package.</p>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card"><div class="feature-icon">🏖️</div><h3>Stunning Homepage</h3><p>A beautiful, branded first impression that captures your agency's personality and gets travelers excited.</p></div>
+    <div class="feature-card"><div class="feature-icon">📱</div><h3>Mobile Responsive</h3><p>Looks perfect on every phone, tablet, and desktop. Over 70% of travelers browse on mobile.</p></div>
+    <div class="feature-card"><div class="feature-icon">✈️</div><h3>Destination Pages</h3><p>Showcase your specialties — Caribbean, Europe, cruises — with rich destination content.</p></div>
+    <div class="feature-card"><div class="feature-icon">⚙️</div><h3>API Support</h3><p>Secure API connections for live availability, booking systems, and more.</p></div>
+    <div class="feature-card"><div class="feature-icon">📬</div><h3>Booking Inquiry Form</h3><p>Capture qualified leads 24/7 with smart contact forms that go straight to your inbox.</p></div>
+    <div class="feature-card"><div class="feature-icon">🏆</div><h3>Certifications Section</h3><p>Display CLIA, IATAN, or supplier certifications to build instant trust with clients.</p></div>
+    <div class="feature-card"><div class="feature-icon">📈</div><h3>Google Analytics</h3><p>See exactly where your clients come from, which pages they love, and what converts.</p></div>
+    <div class="feature-card"><div class="feature-icon">🔒</div><h3>SSL + Hosting Setup</h3><p>Secure, fast hosting configured and ready. Your domain, your email — all set up for you.</p></div>
+    <div class="feature-card"><div class="feature-icon">🔧</div><h3>Post-Launch Support</h3><p>Updates, tweaks, and maintenance so you're never left figuring things out alone.</p></div>
+  </div>
+</section>
+
+<!-- ═══ MOCKUPS ═══ -->
+<section id="examples">
+  <div class="examples-header">
+    <div>
+      <p class="section-label">Design Concepts</p>
+      <h2 class="section-title">Two Style Directions<br/>for Your Site</h2>
+    </div>
+    <p class="section-sub" style="max-width:320px">These are previews of two design directions. We'll finalize your look on our discovery call.</p>
+  </div>
+
+  <div class="mockup-grid">
+
+    <!-- STYLE A -->
+    <div>
+      <div class="browser-frame">
+        <div class="browser-bar">
+          <div class="bm-dots">
+            <div class="bm-dot" style="background:#ff5f57"></div>
+            <div class="bm-dot" style="background:#ffbd2e"></div>
+            <div class="bm-dot" style="background:#28c840"></div>
+          </div>
+          <div class="bm-url">yourtravelagency.com</div>
+        </div>
+        <div class="ma">
+          <div class="ma-hero">
+            <div class="ma-nav">
+              <span class="ma-logo">✦ I Got You Travel</span>
+              <div class="ma-nav-links"><span>Destinations</span><span>Experiences</span><span>About</span></div>
+            </div>
+            <div class="ma-tagline">Est. 2009 · Luxury Curated Journeys</div>
+            <div class="ma-headline">The World,<br/>on Your <em>Terms.</em></div>
+            <div class="ma-sub">Private journeys designed around your vision. Bespoke, unhurried, unforgettable.</div>
+            <div class="ma-cta">Start Planning →</div>
+          </div>
+          <div class="ma-body">
+            <div class="ma-row-label">Signature Destinations</div>
+            <div class="ma-cards">
+              <div class="ma-card"><div class="ma-card-img ma-c-sant">🏛️</div><div class="ma-card-info"><div class="ma-card-name">Santorini</div><div class="ma-card-price">from $4,200</div></div></div>
+              <div class="ma-card"><div class="ma-card-img ma-c-am">⛵</div><div class="ma-card-info"><div class="ma-card-name">Amalfi Coast</div><div class="ma-card-price">from $3,800</div></div></div>
+              <div class="ma-card"><div class="ma-card-img ma-c-dub">🌴</div><div class="ma-card-info"><div class="ma-card-name">Dubai</div><div class="ma-card-price">from $2,900</div></div></div>
+            </div>
+            <div class="ma-strip">
+              <div class="ma-strip-txt">✉ Free concierge consultation · No obligations</div>
+              <div class="ma-strip-act">Book a call →</div>
+            </div>
+            <div class="ma-trust">
+              <div class="ma-trust-item"><div class="ma-trust-num">2,400+</div><div class="ma-trust-lbl">Happy Travelers</div></div>
+              <div class="ma-trust-item"><div class="ma-trust-num">15yr</div><div class="ma-trust-lbl">Experience</div></div>
+              <div class="ma-trust-item"><div class="ma-trust-num">98%</div><div class="ma-trust-lbl">Return Rate</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STYLE B -->
+    <div>
+      <div class="browser-frame">
+        <div class="browser-bar">
+          <div class="bm-dots">
+            <div class="bm-dot" style="background:#ff5f57"></div>
+            <div class="bm-dot" style="background:#ffbd2e"></div>
+            <div class="bm-dot" style="background:#28c840"></div>
+          </div>
+          <div class="bm-url">yourtravelagency.com</div>
+        </div>
+        <div class="mb">
+          <div class="mb-hero">
+            <div class="mb-g1"></div>
+            <div class="mb-g2"></div>
+            <div class="mb-nav">
+              <div class="mb-logo">B &amp; L<span>.</span></div>
+              <div class="mb-pill">✈ 3 spots left this month</div>
+            </div>
+            <div class="mb-eye">// Next-gen travel curation</div>
+            <div class="mb-headline">See the World<br/><span>Differently.</span></div>
+            <div class="mb-sub">AI-matched itineraries. Expert human touch. Zero guesswork.</div>
+            <div class="mb-btns">
+              <button class="mb-btn-p">Get matched →</button>
+              <button class="mb-btn-g">View packages</button>
+            </div>
+          </div>
+          <div class="mb-body">
+            <div class="mb-slabel">Trending now</div>
+            <div class="mb-dest-grid">
+              <div class="mb-dest">
+                <div class="mb-dest-vis mb-d-bali"><div class="mb-dest-tag">Trending</div></div>
+                <div class="mb-dest-info">
+                  <img class="mb-dest-img" src="https://placehold.co/200x48/134e5e/ffffff?text=Bali" alt="Bali"/>
+                  <div class="mb-dest-name">Bali</div>
+                  <div class="mb-dest-price">from $2,100</div>
+                </div>
+              </div>
+              <div class="mb-dest">
+                <div class="mb-dest-vis mb-d-maldives"><div class="mb-dest-tag">Exclusive</div></div>
+                <div class="mb-dest-info">
+                  <div class="mb-dest-name">Maldives</div>
+                  <div class="mb-dest-price">from $5,400</div>
+                </div>
+              </div>
+              <div class="mb-dest">
+                <div class="mb-dest-vis mb-d-kyoto"><div class="mb-dest-tag">New</div></div>
+                <div class="mb-dest-info">
+                  <div class="mb-dest-name">Kyoto</div>
+                  <div class="mb-dest-price">from $3,200</div>
+                </div>
+              </div>
+            </div>
+            <div class="mb-slabel">Choose your tier</div>
+            <div class="mb-pkgs">
+              <div class="mb-pkg">
+                <div class="mb-pkg-lbl">Explorer</div>
+                <div class="mb-pkg-name">Wanderer</div>
+                <div class="mb-pkg-price">$1,499<span>/trip</span></div>
+                <div class="mb-feats">
+                  <div class="mb-feat-row"><div class="mb-dot-c"></div>3 destinations</div>
+                  <div class="mb-feat-row"><div class="mb-dot-c"></div>Hotel curated</div>
+                  <div class="mb-feat-row"><div class="mb-dot-c"></div>24/7 support</div>
+                </div>
+              </div>
+              <div class="mb-pkg mb-feat">
+                <div class="mb-pkg-lbl">Most popular</div>
+                <div class="mb-pkg-name">Voyager</div>
+                <div class="mb-pkg-price">$2,999<span>/trip</span></div>
+                <div class="mb-feats">
+                  <div class="mb-feat-row"><div class="mb-dot-c"></div>Unlimited stops</div>
+                  <div class="mb-feat-row"><div class="mb-dot-c"></div>Private transfers</div>
+                  <div class="mb-feat-row"><div class="mb-dot-c"></div>Concierge access</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mb-strip">
+            <div class="mb-strip-txt">Free 20-min strategy call with your travel advisor</div>
+            <div class="mb-strip-arr">Book now →</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Labels -->
+  <div class="mockup-labels">
+    <div>
+      <div class="ml-name">Style A — Riviera Luxury</div>
+      <span class="ml-badge badge-luxury">Gold &amp; Deep Navy · Serif · Timeless</span>
+    </div>
+    <div>
+      <div class="ml-name">Style B — Ultra Modern</div>
+      <span class="ml-badge badge-modern">Dark Mode · Indigo Glow · Bold</span>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-top:36px;padding:22px 28px;background:var(--sky);border-radius:var(--r-lg);max-width:580px;margin-left:auto;margin-right:auto">
+    <p style="font-size:0.88rem;color:var(--ocean);font-weight:600">💡 These are just starting points</p>
+    <p style="font-size:0.83rem;color:var(--muted);margin-top:5px;line-height:1.6">Your final site will be custom designed to match your brand, colors, logo, and personality. We'll decide everything together on our discovery call.</p>
+  </div>
+</section>
+
+<!-- ═══ PACKAGES ═══ -->
+<section id="packages">
+  <div class="text-center">
+    <p class="section-label">Transparent Pricing</p>
+    <h2 class="section-title">Choose Your Package</h2>
+    <p class="section-sub">Simple, clear pricing. No hidden fees. See exactly what's included before you commit to a single dollar.</p>
+  </div>
+
+  <div class="pkg-wrap">
+
+    <!-- LAUNCH -->
+    <div class="pc">
+      <div class="pc-head">
+        <div class="pc-tier">Launch</div>
+        <div class="pc-price">$1,500</div>
+        <div class="pc-note">Perfect for new or solo agents who need a clean, professional online presence.</div>
+        <div class="pc-pills">
+          <span class="pc-pill">⏱ 2–3 weeks</span>
+          <span class="pc-pill">🔄 2 revisions</span>
+          <span class="pc-pill">🛟 30-day support</span>
+        </div>
+      </div>
+      <div class="pc-feats">
+        <div class="pc-feat"><div class="pc-feat-dot dot-yes">✓</div><div><span class="pc-feat-label">Custom 1-page website</span><span class="pc-feat-sub">Fully branded design</span></div></div>
+        <div class="pc-feat"><div class="pc-feat-dot dot-yes">✓</div><div><span class="pc-feat-label">Mobile optimized</span><span class="pc-feat-sub">All devices, all screen sizes</span></div></div>
+        <div class="pc-feat"><div class="pc-feat-dot dot-yes">✓</div><div><span class="pc-feat-label">Booking contact form</span><span class="pc-feat-sub">Email inquiry form</span></div></div>
+        <div class="pc-feat"><div class="pc-feat-dot dot-yes">✓</div><div><span class="pc-feat-label">Up to 3 certifications</span><span class="pc-feat-sub">CLIA, IATAN, supplier certs</span></div></div>
+        <div class="pc-feat"><div class="pc-feat-dot dot-yes">✓</div><div><span class="pc-feat-label">Basic SEO setup</span><span class="pc-feat-sub">Meta tags, titles, descriptions</span></div></div>
+        <div class="pc-feat"><div class="pc-feat-dot dot-no">✗</div><div><span class="pc-feat-label dim">Admin Dashboard</span></div></div>
+        <div class="pc-feat"><div class="pc-feat-dot dot-no">✗</div><div><span class="pc-feat-label dim">Analytics Setup</span></div></div>
+        <div class="pc-feat"><div class="pc-feat-dot dot-no">✗</div><div><span class="pc-feat-label dim">Domain &amp; Hosting Setup</span></div></div>
+      </div>
+      <div class="pc-foot">
+        <button class="pc-btn btn-ocean" onclick="smoothTo('contact')">Get Started →</button>
+      </div>
+    </div>
+
+    <!-- GROWTH (popular) -->
+    <div class="pc pc-pop">
+      <div class="pc-badge">⭐ Most Popular</div>
+      <div class="pc-head">
+        <div class="pc-tier">Growth</div>
+        <div class="pc-price">$2,000</div>
+        <div class="pc-note">Best for agencies ready to attract more clients and grow consistently.</div>
+        <div class="pc-pills">
+          <span class="pc-pill">⏱ 3–4 weeks</span>
+          <span class="pc-pill">🔄 3 revisions</span>
+          <span class="pc-pill">🛟 60-day support</span>
+        </div>
+      </div>
+      <div class="pc-feats">
+        <div class="pc-feat"><div class="pc-feat-dot dot-pop">✓</div><div><span class="pc-feat-label">Multi-page website</span><span class="pc-feat-sub">Home, destinations, about &amp; more</span></div></div>
+        <div class="pc-feat"><div class="pc-feat-dot dot-pop">✓</div><div><span class="pc-feat-label">Mobile optimized</span><span class="pc-feat-sub">All devices, all screen sizes</span></div></div>
+        <div class="pc-feat"><div class="pc-feat-dot dot-pop">✓</div><div><span class="pc-feat-label">Booking + calendar integration</span><span class="pc-feat-sub">Email + calendar sync</span></div></div>
+        <div class="pc-feat"><div class="pc-feat-dot dot-pop">✓</div><div><span class="pc-feat-label">Unlimited certifications</span><span class="pc-feat-sub">All your credentials displayed</span></div></div>
+        <div class="pc-feat"><div class="pc-feat-dot dot-pop">✓</div><div><span class="pc-feat-label">Analytics setup</span><span class="pc-feat-sub">Track traffic &amp; conversions</span></div></div>
+        <div class="pc-feat"><div class="pc-feat-dot dot-pop">✓</div><div><span class="pc-feat-label">Admin dashboard</span><span class="pc-feat-sub">Manage content anytime yourself</span></div></div>
+        <div class="pc-feat"><div class="pc-feat-dot dot-no">✗</div><div><span class="pc-feat-label dim">Domain &amp; Hosting Setup</span></div></div>
+        <div class="pc-feat"><div class="pc-feat-dot dot-no">✗</div><div><span class="pc-feat-label dim">Ongoing Maintenance</span></div></div>
+      </div>
+      <div class="pc-foot">
+        <button class="pc-btn btn-pop" onclick="smoothTo('contact')">Get This Package →</button>
+      </div>
+    </div>
+
+    <!-- AUTHORITY -->
+    <div class="pc">
+      <div class="pc-head">
+        <div class="pc-tier">Authority</div>
+        <div class="pc-price">$2,500</div>
+        <div class="pc-note">Everything handled so you can focus 100% on selling travel.</div>
+        <div class="pc-pills">
+          <span class="pc-pill">⏱ 4–5 weeks</span>
+          <span class="pc-pill">🔄 Unlimited</span>
+          <span class="pc-pill">🛟 90-day support</span>
+        </div>
+      </div>
+      <div class="pc-feats">
+        <div class="pc-feat"><div class="pc-feat-dot dot-yes">✓</div><div><span class="pc-feat-label">Everything in Growth</span><span class="pc-feat-sub">All Growth features included</span></div></div>
+        <div class="pc-feat"><div class="pc-feat-dot dot-yes">✓</div><div><span class="pc-feat-label">Full CMS</span><span class="pc-feat-sub">Edit your entire site anytime</span></div></div>
+        <div class="pc-feat"><div class="pc-feat-dot dot-yes">✓</div><div><span class="pc-feat-label">Automated email replies</span><span class="pc-feat-sub">Auto-response to every inquiry</span></div></div>
+        <div class="pc-feat"><div class="pc-feat-dot dot-yes">✓</div><div><span class="pc-feat-label">Domain &amp; hosting setup</span><span class="pc-feat-sub">1 year included, fully configured</span></div></div>
+        <div class="pc-feat"><div class="pc-feat-dot dot-yes">✓</div><div><span class="pc-feat-label">3 months maintenance</span><span class="pc-feat-sub">Security, updates &amp; tweaks</span></div></div>
+        <div class="pc-feat"><div class="pc-feat-dot dot-yes">✓</div><div><span class="pc-feat-label">Full analytics dashboard</span><span class="pc-feat-sub">Complete reporting setup</span></div></div>
+        <div class="pc-feat"><div class="pc-feat-dot dot-yes">✓</div><div><span class="pc-feat-label">Admin dashboard</span><span class="pc-feat-sub">Full CMS — update anything</span></div></div>
+        <div class="pc-feat"><div class="pc-feat-dot dot-yes">✓</div><div><span class="pc-feat-label">Unlimited certifications</span><span class="pc-feat-sub">All credentials beautifully displayed</span></div></div>
+      </div>
+      <div class="pc-foot">
+        <button class="pc-btn btn-ocean" onclick="smoothTo('contact')">Get Started →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Trust strip -->
+  <div class="trust-row">
+    <div class="trust-item"><div class="trust-icon">💳</div><div><h4>50 / 50 Payment Split</h4><p>Half upfront, half at launch. No risk.</p></div></div>
+    <div class="trust-item"><div class="trust-icon">📋</div><div><h4>Clear Scope Agreement</h4><p>You know exactly what you're getting before paying.</p></div></div>
+    <div class="trust-item"><div class="trust-icon">⏰</div><div><h4>Realistic Timelines</h4><p>Time built in for revisions and real feedback.</p></div></div>
+    <div class="trust-item"><div class="trust-icon">🔑</div><div><h4>You Own Everything</h4><p>Your domain, code, and business are fully yours.</p></div></div>
+  </div>
+</section>
+
+<!-- ═══ PROCESS ═══ -->
+<section id="process">
+  <div class="text-center">
+    <p class="section-label">How It Works</p>
+    <h2 class="section-title">From Zero to Launch —<br/>Step by Step</h2>
+    <p class="section-sub">No guesswork. Here's exactly what happens after you say yes.</p>
+  </div>
+  <div class="process-wrap">
+    <div class="ps"><div class="ps-num">1</div><div class="ps-week">Day 1–2</div><h4>Discovery Call</h4><p>We talk about your agency, goals, and style. You receive a full scope document to approve.</p></div>
+    <div class="ps"><div class="ps-num">2</div><div class="ps-week">Week 1</div><h4>Design Mockup</h4><p>You see your site's look before a single line of code is written. Revisions welcome.</p></div>
+    <div class="ps"><div class="ps-num">3</div><div class="ps-week">Week 2–4</div><h4>Build &amp; Content</h4><p>Your site is built, photos and copy go in, everything is tested on all devices.</p></div>
+    <div class="ps"><div class="ps-num">4</div><div class="ps-week">Week 5+</div><h4>Launch &amp; Handoff</h4><p>Domain live, analytics tracking, and a walkthrough video so you manage everything confidently.</p></div>
+  </div>
+</section>
+
+<!-- ═══ PARTNERS & CERTIFICATIONS ═══ -->
+<section id="partners">
+  <div class="text-center">
+    <p class="section-label">Built-In Credibility</p>
+    <h2 class="section-title">Laura's Partners &amp;<br/>Certifications Page</h2>
+    <p class="section-sub">Your site will feature a live, filterable partners page where clients can browse your agency codes, certifications, and book directly with you.</p>
+  </div>
+
+  <div class="partners-layout">
+
+    <!-- LEFT: Phone mockup -->
+    <div>
+      <div class="phone-shell">
+        <div class="phone-status">
+          <span>9:41</span>
+          <span style="display:flex;gap:5px;align-items:center;font-size:10px;">●●● WiFi 🔋</span>
+        </div>
+
+        <div class="phone-scroll" id="ph-scroll">
+          <!-- Header -->
+          <div class="ph-header">
+            <div class="ph-back">←</div>
+            <div class="ph-title-block">
+              <div class="ph-pretitle">I Got You Travel</div>
+              <div class="ph-title">Partners &amp; Certs</div>
+            </div>
+            <div class="ph-avatar">✈️</div>
+          </div>
+
+          <!-- Tabs -->
+          <div class="ph-tabs">
+            <div class="ph-tab ph-active" id="ph-tab-p" onclick="phTab('partners')">Partners</div>
+            <div class="ph-tab" id="ph-tab-c" onclick="phTab('certs')">Certifications</div>
+          </div>
+
+          <!-- PARTNERS PANEL -->
+          <div id="ph-partners">
+            <div class="ph-filters">
+              <div class="ph-chip ph-chip-active" onclick="phFilter(this,'all')">All</div>
+              <div class="ph-chip" onclick="phFilter(this,'cruise')">Cruise</div>
+              <div class="ph-chip" onclick="phFilter(this,'allinclusive')">All-Inclusive</div>
+              <div class="ph-chip" onclick="phFilter(this,'themepark')">Theme Park</div>
+              <div class="ph-chip" onclick="phFilter(this,'package')">Package</div>
+              <div class="ph-chip" onclick="phFilter(this,'hotel')">Hotel</div>
+            </div>
+            <div class="ph-slabel">Active Partners</div>
+
+            <div class="ph-pcard" data-pcat="cruise">
+              <div class="ph-pcard-top">
+                <div class="ph-logo">🚢</div>
+                <div class="ph-badges">
+                  <div class="ph-badge-type">Cruise</div>
+                  <div class="ph-badge-cert">✓ Certified</div>
+                </div>
+              </div>
+              <div class="ph-pname">Royal Caribbean</div>
+              <div class="ph-ptag">World's largest cruise line across 240+ destinations.</div>
+              <div class="ph-stars"><span class="ph-star">★</span><span class="ph-star">★</span><span class="ph-star">★</span><span class="ph-star">★</span><span class="ph-star">★</span><span class="ph-rating">5.0 · Top Partner</span></div>
+              <div class="ph-comm">💰 Up to 16% Commission</div>
+              <div class="ph-code-row">
+                <div class="ph-code-box">AGENT-RC2024</div>
+                <button class="ph-copy-btn" onclick="phCopy(this,'AGENT-RC2024')">Copy Code</button>
+              </div>
+              <div class="ph-book">Book with Laura →</div>
+            </div>
+
+            <div class="ph-pcard" data-pcat="allinclusive">
+              <div class="ph-pcard-top">
+                <div class="ph-logo">🌴</div>
+                <div class="ph-badges">
+                  <div class="ph-badge-type">All-Inclusive</div>
+                  <div class="ph-badge-cert">✓ Certified</div>
+                </div>
+              </div>
+              <div class="ph-pname">Sandals Resorts</div>
+              <div class="ph-ptag">Ultra-luxury all-inclusive couples resorts across the Caribbean.</div>
+              <div class="ph-stars"><span class="ph-star">★</span><span class="ph-star">★</span><span class="ph-star">★</span><span class="ph-star">★</span><span class="ph-star">★</span><span class="ph-rating">5.0 · Preferred Partner</span></div>
+              <div class="ph-comm">💰 Up to 20% Commission</div>
+              <div class="ph-code-row">
+                <div class="ph-code-box">AGENT-SND2024</div>
+                <button class="ph-copy-btn" onclick="phCopy(this,'AGENT-SND2024')">Copy Code</button>
+              </div>
+              <div class="ph-book">Book with Laura →</div>
+            </div>
+
+            <div class="ph-pcard" data-pcat="themepark">
+              <div class="ph-pcard-top">
+                <div class="ph-logo">🏰</div>
+                <div class="ph-badges">
+                  <div class="ph-badge-type">Theme Park</div>
+                  <div class="ph-badge-cert">✓ Certified</div>
+                </div>
+              </div>
+              <div class="ph-pname">Disney Parks</div>
+              <div class="ph-ptag">Official travel partner for Walt Disney World &amp; Disneyland vacations.</div>
+              <div class="ph-stars"><span class="ph-star">★</span><span class="ph-star">★</span><span class="ph-star">★</span><span class="ph-star">★</span><span class="ph-star" style="color:#ddd">★</span><span class="ph-rating">4.8 · Official Partner</span></div>
+              <div class="ph-comm">💰 Up to 10% Commission</div>
+              <div class="ph-code-row">
+                <div class="ph-code-box">AGENT-DIS2024</div>
+                <button class="ph-copy-btn" onclick="phCopy(this,'AGENT-DIS2024')">Copy Code</button>
+              </div>
+              <div class="ph-book">Book with Laura →</div>
+            </div>
+
+            <div class="ph-pcard" data-pcat="package">
+              <div class="ph-pcard-top">
+                <div class="ph-logo">✈️</div>
+                <div class="ph-badges">
+                  <div class="ph-badge-type">Package</div>
+                  <div class="ph-badge-cert">✓ Certified</div>
+                </div>
+              </div>
+              <div class="ph-pname">Apple Vacations</div>
+              <div class="ph-ptag">All-inclusive packages to Mexico, Caribbean &amp; Central America.</div>
+              <div class="ph-stars"><span class="ph-star">★</span><span class="ph-star">★</span><span class="ph-star">★</span><span class="ph-star">★</span><span class="ph-star">★</span><span class="ph-rating">4.9 · Elite Partner</span></div>
+              <div class="ph-comm">💰 Up to 14% Commission</div>
+              <div class="ph-code-row">
+                <div class="ph-code-box">AGENT-APV2024</div>
+                <button class="ph-copy-btn" onclick="phCopy(this,'AGENT-APV2024')">Copy Code</button>
+              </div>
+              <div class="ph-book">Book with Laura →</div>
+            </div>
+
+            <div class="ph-pcard" data-pcat="hotel">
+              <div class="ph-pcard-top">
+                <div class="ph-logo">🏨</div>
+                <div class="ph-badges">
+                  <div class="ph-badge-type">Hotel</div>
+                  <div class="ph-badge-cert">✓ Certified</div>
+                </div>
+              </div>
+              <div class="ph-pname">Marriott Bonvoy</div>
+              <div class="ph-ptag">8,000+ hotels across 139 countries with exclusive agent rates.</div>
+              <div class="ph-stars"><span class="ph-star">★</span><span class="ph-star">★</span><span class="ph-star">★</span><span class="ph-star">★</span><span class="ph-star" style="color:#ddd">★</span><span class="ph-rating">4.7 · Preferred Partner</span></div>
+              <div class="ph-comm">💰 Up to 12% Commission</div>
+              <div class="ph-code-row">
+                <div class="ph-code-box">AGENT-MAR2024</div>
+                <button class="ph-copy-btn" onclick="phCopy(this,'AGENT-MAR2024')">Copy Code</button>
+              </div>
+              <div class="ph-book">Book with Laura →</div>
+            </div>
+          </div><!-- /ph-partners -->
+
+          <!-- CERTS PANEL -->
+          <div id="ph-certs" style="display:none;">
+            <div class="ph-cert-intro">
+              <div class="ph-cert-intro-lbl">Professional Credentials</div>
+              <div class="ph-cert-intro-title">Laura's Certifications</div>
+              <div class="ph-cert-intro-sub">Verified credentials from top travel industry partners</div>
+            </div>
+            <div class="ph-slabel">Active</div>
+            <div class="ph-cert-card"><div class="ph-cert-icon" style="background:#e6f0ff;">🚢</div><div class="ph-cert-body"><div class="ph-cert-name">Royal Caribbean Certified</div><div class="ph-cert-sub">RCL Academy — Cruise Expert Level 3</div></div><div class="ph-cert-badge cert-ok">✓ Active</div></div>
+            <div class="ph-cert-card"><div class="ph-cert-icon" style="background:#e8f8f1;">🌴</div><div class="ph-cert-body"><div class="ph-cert-name">Sandals Specialist</div><div class="ph-cert-sub">Certified Sandals &amp; Beaches Specialist</div></div><div class="ph-cert-badge cert-ok">✓ Active</div></div>
+            <div class="ph-cert-card"><div class="ph-cert-icon" style="background:#fff3e0;">🏰</div><div class="ph-cert-body"><div class="ph-cert-name">Disney College of Knowledge</div><div class="ph-cert-sub">Authorized Disney Vacation Planner</div></div><div class="ph-cert-badge cert-ok">✓ Active</div></div>
+            <div class="ph-cert-card"><div class="ph-cert-icon" style="background:#f0e8ff;">🌍</div><div class="ph-cert-body"><div class="ph-cert-name">CLIA Accredited</div><div class="ph-cert-sub">Cruise Lines Intl. Association</div></div><div class="ph-cert-badge cert-ok">✓ Active</div></div>
+            <div class="ph-cert-card"><div class="ph-cert-icon" style="background:#e8f4fd;">✈️</div><div class="ph-cert-body"><div class="ph-cert-name">Apple Vacations Elite</div><div class="ph-cert-sub">Elite Travel Agent Status</div></div><div class="ph-cert-badge cert-ok">✓ Active</div></div>
+            <div class="ph-slabel" style="margin-top:14px;">Pending</div>
+            <div class="ph-cert-card"><div class="ph-cert-icon" style="background:#fff8e6;">🛳</div><div class="ph-cert-body"><div class="ph-cert-name">Norwegian Cruise Line</div><div class="ph-cert-sub">NCL ProAgent — In Progress</div></div><div class="ph-cert-badge cert-pend">⏳ Pending</div></div>
+          </div><!-- /ph-certs -->
+
+        </div><!-- /phone-scroll -->
+
+        <!-- Bottom nav -->
+        <div class="phone-bottom-nav">
+          <div class="pbn-item"><div class="pbn-icon">🏠</div><span>Home</span></div>
+          <div class="pbn-item"><div class="pbn-icon">✈️</div><span>Trips</span></div>
+          <div class="pbn-item pbn-active"><div class="pbn-icon">🤝</div><span>Partners</span></div>
+          <div class="pbn-item"><div class="pbn-icon">💬</div><span>Chat</span></div>
+          <div class="pbn-item"><div class="pbn-icon">👩</div><span>Profile</span></div>
+        </div>
+      </div><!-- /phone-shell -->
+    </div>
+
+    <!-- RIGHT: Description -->
+    <div class="partners-desc">
+      <p class="section-label">A Page That Builds Trust</p>
+      <h2 class="section-title">Showcase Your Codes &amp;<br/>Credentials to Clients</h2>
+      <p class="partners-lead">Laura's site will include a beautiful, interactive Partners &amp; Certifications page — giving clients instant confidence that they're booking with a verified, well-connected professional.</p>
+      <ul class="partners-perks">
+        <li>
+          <div class="perk-check">✓</div>
+          <div class="perk-text"><strong>Filterable partner directory</strong><span>Clients filter by cruise, hotel, all-inclusive, package, or theme park to find the right fit fast.</span></div>
+        </li>
+        <li>
+          <div class="perk-check">✓</div>
+          <div class="perk-text"><strong>One-tap code copy</strong><span>Each partner card displays Laura's agent code with a "Copy Code" button so clients can use it instantly at checkout.</span></div>
+        </li>
+        <li>
+          <div class="perk-check">✓</div>
+          <div class="perk-text"><strong>"Book with Laura" direct links</strong><span>Every card links clients directly to Laura's booking page — no friction, no confusion.</span></div>
+        </li>
+        <li>
+          <div class="perk-check">✓</div>
+          <div class="perk-text"><strong>Certification wall</strong><span>CLIA, Disney, Sandals, Royal Caribbean, Apple Vacations — all credentials displayed with active/pending status.</span></div>
+        </li>
+        <li>
+          <div class="perk-check">✓</div>
+          <div class="perk-text"><strong>Commission &amp; rating display</strong><span>Optional commission percentages and partner star ratings to signal Laura's preferred vendors.</span></div>
+        </li>
+      </ul>
+      <div class="partners-cta-row">
+        <button class="btn-solid" onclick="smoothTo('contact')">Get This Feature →</button>
+        <span class="partners-cta-note">Included in <strong>Growth &amp; Authority</strong> packages</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ ABOUT ═══ -->
+<section id="about">
+  <div class="about-wrap">
+    <div>
+      <div class="about-card">
+        <div class="about-av-row">
+          <div class="about-av">👩‍💻</div>
+          <div>
+            <div class="about-av-name">Your Web Developer</div>
+            <div class="about-av-role">Travel Site Specialist · MERN Stack</div>
+          </div>
+        </div>
+        <div class="about-quote">
+          "I don't just build websites — I build tools that help travel agents compete, get found, and close more bookings."
+        </div>
+        <div class="about-chips">
+          <span class="chip">MERN Stack</span>
+          <span class="chip">Tailwind CSS</span>
+          <span class="chip">SEO-First</span>
+          <span class="chip">Mobile-First</span>
+          <span class="chip">Happy Delivery</span>
+        </div>
+      </div>
+      <div class="about-stats">
+        <div class="about-stat-box"><div class="stat-num">100%</div><div class="stat-lbl">On-Time Delivery</div></div>
+        <div class="about-stat-box"><div class="stat-num">5★</div><div class="stat-lbl">Client Satisfaction</div></div>
+        <div class="about-stat-box"><div class="stat-num">2–5</div><div class="stat-lbl">Weeks to Launch</div></div>
+      </div>
+    </div>
+    <div class="about-content">
+      <p class="section-label">Why Work With Me</p>
+      <h2 class="section-title">I'm Invested in<br/>Your Success</h2>
+      <p class="about-lead">This isn't a template you're buying. Every site is custom designed from scratch for your agency — built to convert visitors into paying clients.</p>
+      <ul class="about-list">
+        <li><div class="a-check-icon">✓</div><div class="a-list-text"><strong>No radio silence</strong><span>Regular progress updates throughout — always know where things stand.</span></div></li>
+        <li><div class="a-check-icon">✓</div><div class="a-list-text"><strong>Revisions included</strong><span>We get it right before going live. Your feedback shapes every decision.</span></div></li>
+        <li><div class="a-check-icon">✓</div><div class="a-list-text"><strong>Plain language, always</strong><span>No confusing tech jargon. I explain everything clearly so you feel in control.</span></div></li>
+        <li><div class="a-check-icon">✓</div><div class="a-list-text"><strong>You stay in control</strong><span>After launch you can make simple updates yourself — no developer dependency.</span></div></li>
+        <li><div class="a-check-icon">✓</div><div class="a-list-text"><strong>Post-launch support</strong><span>I don't disappear after launch. Available if anything needs adjusting.</span></div></li>
+      </ul>
+      <div class="about-cta-row">
+        <button class="btn-solid" onclick="smoothTo('contact')">Let's Work Together →</button>
+        <span class="about-cta-note">Free discovery call · <strong>No commitment</strong></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONTACT ═══ -->
+<section id="contact">
+  <div class="contact-wrap">
+    <div class="contact-info">
+      <p class="section-label" style="color:#7dd3fc">Ready to Get Started?</p>
+      <h2 class="section-title">Let's Build Your Dream<br/>Travel Site</h2>
+      <p>Fill out the form and I'll get back within 24 hours to schedule a free 30 minute discovery call. No payment, no commitment just a conversation.</p>
+      <ul class="contact-perks">
+        <li><span class="perk-ico">🗓️</span> Free 30-min discovery call</li>
+        <li><span class="perk-ico">📄</span> Written quote before any payment</li>
+        <li><span class="perk-ico">✅</span> No pressure just clarity on what you'd get</li>
+        <li><span class="perk-ico">⚡</span> Can start in days</li>
+      </ul>
+    </div>
+    <div class="cform-card">
+      <h3>📬 Send Me a Message</h3>
+      <form id="contactForm">
+        <div class="frow">
+          <div class="fg"><label>Your Name</label><input type="text" placeholder="e.g. Maria Lopez" required/></div>
+          <div class="fg"><label>Email Address</label><input type="email" placeholder="maria@youragency.com" required/></div>
+        </div>
+        <div class="fg"><label>Agency Name</label><input type="text" placeholder="Sunset Vacations Travel Co."/></div>
+        <div class="fg">
+          <label>Interested Package</label>
+          <select>
+            <option value="">Select a package...</option>
+            <option>Launch — $1,500</option>
+            <option>Growth — $2,000</option>
+            <option>Authority — $2,500</option>
+            <option>Not sure yet — let's talk</option>
+          </select>
+        </div>
+        <div class="fg"><label>Tell Me About Your Agency</label><textarea placeholder="What kind of travel do you specialize in? What's missing from your current online presence?"></textarea></div>
+        <button type="submit" class="fsub">Send Message &amp; Book Free Call →</button>
+        <p class="fnote">🔒 No spam. No obligation. Response within 24 hours.</p>
+      </form>
+      <div class="success-msg" id="successMsg">
+        <p>🎉 Message received! I'll be in touch within 24 hours to schedule your free call. Exciting things ahead!</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <p>✨ Proposal prepared with care  <strong>Happy Travels Web Design</strong> · Custom websites for travel agents · © 2026</p>
+  <p style="margin-top:6px;font-size:0.74rem">Questions? Reply to my email or fill out the form above.</p>
+</footer>
+
+<script>
+/* Navbar scroll */
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
+});
+
+/* Smooth scroll */
+function smoothTo(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+/* Mobile menu */
+function toggleMenu() {
+  const ham    = document.getElementById('ham');
+  const drawer = document.getElementById('drawer');
+  ham.classList.toggle('open');
+  drawer.classList.toggle('open');
+}
+function closeMenu() {
+  document.getElementById('ham').classList.remove('open');
+  document.getElementById('drawer').classList.remove('open');
+}
+
+/* Bubbles */
+const container = document.getElementById('bubbles');
+for (let i = 0; i < 14; i++) {
+  const b = document.createElement('div');
+  b.className = 'bubble';
+  const size = 28 + Math.random() * 90;
+  b.style.cssText = `width:${size}px;height:${size}px;left:${Math.random()*100}%;top:${15+Math.random()*72}%;animation-duration:${5+Math.random()*9}s;animation-delay:${Math.random()*6}s;`;
+  container.appendChild(b);
+}
+
+/* Contact form */
+document.getElementById('contactForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const form = e.target;
+  const inputs = form.querySelectorAll('input[type="text"]');
+  const data = {
+    name:    inputs[0].value,
+    email:   form.querySelector('input[type="email"]').value,
+    agency:  inputs[1]?.value || '',
+    package: form.querySelector('select').value,
+    message: form.querySelector('textarea').value
+  };
+  try {
+    const res = await fetch('https://formspree.io/f/xjgjzrbb', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    if (res.ok) {
+      form.style.display = 'none';
+      document.getElementById('successMsg').classList.add('show');
+    } else { alert('Something went wrong. Please try again!'); }
+  } catch { alert('Something went wrong. Please try again!'); }
+});
+
+/* Partners phone widget */
+function phTab(tab) {
+  document.getElementById('ph-partners').style.display = tab === 'partners' ? 'block' : 'none';
+  document.getElementById('ph-certs').style.display    = tab === 'certs'    ? 'block' : 'none';
+  document.getElementById('ph-tab-p').classList.toggle('ph-active', tab === 'partners');
+  document.getElementById('ph-tab-c').classList.toggle('ph-active', tab === 'certs');
+}
+function phFilter(el, cat) {
+  document.querySelectorAll('.ph-chip').forEach(c => c.classList.remove('ph-chip-active'));
+  el.classList.add('ph-chip-active');
+  document.querySelectorAll('.ph-pcard').forEach(card => {
+    card.style.display = (cat === 'all' || card.dataset.pcat === cat) ? 'block' : 'none';
+  });
+}
+function phCopy(btn, code) {
+  navigator.clipboard.writeText(code).catch(() => {});
+  const orig = btn.textContent;
+  btn.textContent = '✓ Copied!';
+  btn.classList.add('copied');
+  setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 2000);
+}
+
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const id = a.getAttribute('href').slice(1);
+    smoothTo(id);
+    closeMenu();
+  });
+});
+</script>
+</body>
+</html>
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Happy Travels</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
@@ -382,1185 +2398,3 @@
 </style>
 </head>
 <body>
-
-<!-- NAV -->
-<nav id="navbar">
-  <div class="nav-logo">
-    <span class="wave">👩🏻‍💻🔥</span>
-    <span>Your Favorite Software Engineer</span>
-  </div>
-  <div class="nav-links" id="navLinks">
-    <a href="#features">Features</a>
-    <a href="#examples">Preview</a>
-    <a href="#packages">Packages</a>
-    <a href="#process">Process</a>
-    <a href="#about">About</a>
-    <a href="#contact" class="nav-cta">Let's Talk</a>
-  </div>
-  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
-    <span></span><span></span><span></span>
-  </div>
-</nav>
-
-<!-- HERO -->
-<section id="hero">
-  <div class="hero-bubbles" id="bubbles"></div>
-  <div class="hero-content">
-    <div class="hero-badge"><span class="dot"></span> Proposal Prepared Just for You</div>
-    <h1 class="hero-title">
-      Your Travel Agency<br/>Deserves a<br/><em>Beautiful Website</em>
-    </h1>
-    <p class="hero-sub">
-      A custom, mobile friendly website that showcases your destinations, builds trust with travelers, and turns visitors into paying clients.
-    </p>
-    <div class="hero-actions"></div>
-    <div class="hero-stats">
-      <div class="hero-stat"><div class="num">100%</div><div class="lbl">Mobile Ready</div></div>
-      <div class="hero-stat"><div class="num">2–6</div><div class="lbl">Weeks to Launch</div></div>
-      <div class="hero-stat"><div class="num">$1,500</div><div class="lbl">Starting Price</div></div>
-    </div>
-  </div>
-  <div class="hero-waves">
-    <svg viewBox="0 0 1440 90" xmlns="http://www.w3.org/2000/svg"><path d="M0,45 C240,90 480,0 720,45 C960,90 1200,0 1440,45 L1440,90 L0,90 Z" fill="white"/></svg>
-  </div>
-</section>
-
-<!-- FEATURES -->
-<section id="features">
-  <div class="text-center">
-    <p class="section-label">What's Included</p>
-    <h2 class="section-title">Everything Your Agency Website Needs</h2>
-    <p class="section-sub">No surprise add on fees. Every feature below is included in your chosen package.</p>
-  </div>
-  <div class="features-grid">
-    <div class="feature-card"><div class="feature-icon">🏖️</div><h3>Stunning Homepage</h3><p>A beautiful, branded first impression that captures your agency's personality and gets travelers excited.</p></div>
-    <div class="feature-card"><div class="feature-icon">📱</div><h3>Mobile Responsive</h3><p>Looks perfect on every phone, tablet, and desktop. Over 70% of travelers browse on mobile.</p></div>
-    <div class="feature-card"><div class="feature-icon">✈️</div><h3>Destination Pages</h3><p>Showcase your specialties — Caribbean, Europe, cruises — with rich destination content.</p></div>
-    <div class="feature-card"><div class="feature-icon">⚙️</div><h3>API Support</h3><p>Secure and implement API connections for live availability, booking systems, and more.</p></div>
-    <div class="feature-card"><div class="feature-icon">📬</div><h3>Booking Inquiry Form</h3><p>Capture qualified leads 24/7 with smart contact forms that go straight to your inbox.</p></div>
-    <div class="feature-card"><div class="feature-icon">🏆</div><h3>Certifications Section</h3><p>Display your CLIA, IATAN, or supplier certifications to build instant trust with clients.</p></div>
-    <div class="feature-card"><div class="feature-icon">📈</div><h3>Google Analytics</h3><p>See exactly where your clients come from, which pages they love, and what converts.</p></div>
-    <div class="feature-card"><div class="feature-icon">🔒</div><h3>SSL + Hosting Setup</h3><p>Secure, fast hosting configured and ready. Your domain, your email, all set up for you.</p></div>
-    <div class="feature-card"><div class="feature-icon">🔧</div><h3>Post-Launch Support</h3><p>Updates, tweaks, and maintenance so you're never left figuring things out alone.</p></div>
-  </div>
-</section>
-
-<!-- MOCKUPS -->
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Travel Agency Design Mockups</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: #eff1f3;
-      padding: 40px 24px;
-      min-height: 100vh;
-    }
-
-    .page-title {
-      text-align: center;
-      margin-bottom: 32px;
-    }
-    .page-title .section-label {
-      font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
-      color: #888; margin-bottom: 8px;
-    }
-    .page-title h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 32px; font-weight: 600; color: #1a1a1a;
-    }
-    .page-title p {
-      font-size: 14px; color: #666; margin-top: 6px;
-    }
-
-    .mockups-wrap {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 32px;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    /* ── BROWSER CHROME ── */
-    .browser {
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid rgba(0,0,0,0.1);
-      box-shadow: 0 8px 40px rgba(0,0,0,0.14);
-    }
-    .browser-bar {
-      background: #eeece9;
-      padding: 9px 12px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .dots { display: flex; gap: 5px; }
-    .dot { width: 10px; height: 10px; border-radius: 50%; }
-    .url-bar {
-      flex: 1; background: #fff; border-radius: 5px;
-      padding: 3px 10px; font-size: 11px; color: #999;
-      font-family: 'DM Sans', sans-serif;
-    }
-
-    /* ══════════════════════════════
-       STYLE A — RIVIERA LUXURY
-    ══════════════════════════════ */
-    .mock-a { background: #faf7f2; }
-
-    .a-hero {
-      background: linear-gradient(160deg, #1c7baa 0%, #365f83 60%, #2b6b95 100%);
-      padding: 28px 24px 32px;
-      position: relative;
-      overflow: hidden;
-    }
-    .a-hero::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse at 80% 20%, rgba(212,175,98,0.18) 0%, transparent 60%);
-    }
-    .a-nav {
-      display: flex; justify-content: space-between; align-items: center;
-      margin-bottom: 28px; position: relative; z-index: 1;
-    }
-    .a-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 18px; font-weight: 600; color: #d4af62;
-      letter-spacing: 0.04em;
-    }
-    .a-nav-links { display: flex; gap: 16px; }
-    .a-nav-links span {
-      font-size: 11px; color: rgba(255,255,255,0.55);
-      letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer;
-    }
-    .a-tagline {
-      font-size: 10px; color: #d4af62; letter-spacing: 0.18em; text-transform: uppercase;
-      margin-bottom: 10px; position: relative; z-index: 1;
-    }
-    .a-headline {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 44px; font-weight: 600; color: #fff;
-      line-height: 1.1; margin-bottom: 10px;
-      font-style: italic; position: relative; z-index: 1;
-    }
-    .a-headline em { color: #d4af62; font-style: normal; }
-    .a-sub {
-      font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.6;
-      max-width: 320px; position: relative; z-index: 1;
-    }
-    .a-hero-cta {
-      display: inline-flex; align-items: center; gap: 8px;
-      margin-top: 20px;
-      background: #d4af62; color: #1a3a4a;
-      padding: 10px 22px; border-radius: 3px;
-      font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
-      position: relative; z-index: 1; cursor: pointer;
-    }
-
-    .a-dest-section { padding: 24px; }
-    .a-section-label {
-      font-size: 10px; color: #9a8a72; letter-spacing: 0.14em; text-transform: uppercase;
-      margin-bottom: 14px;
-      display: flex; align-items: center; gap: 12px;
-    }
-    .a-section-label::after {
-      content: ''; flex: 1; height: 1px; background: #e0d8cc;
-    }
-    .a-dest-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 16px; }
-    .a-dest-card {
-      background: #fff; border: 1px solid #e8e0d4;
-      border-radius: 6px; overflow: hidden; cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .a-dest-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.1); }
-    .a-dest-img {
-      height: 72px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 32px;
-    }
-    .a-dest-santorini { background: linear-gradient(135deg, #87CEEB 0%, #4682B4 100%); }
-    .a-dest-amalfi    { background: linear-gradient(135deg, #5f9ea0 0%, #2e8b57 100%); }
-    .a-dest-dubai     { background: linear-gradient(135deg, #DEB887 0%, #D2691E 100%); }
-    .a-dest-info { padding: 10px 12px; }
-    .a-dest-name  { font-size: 13px; font-weight: 500; color: #2a2520; }
-    .a-dest-price { font-size: 11px; color: #9a8a72; margin-top: 2px; }
-
-    .a-strip {
-      background: #1a3a4a; border-radius: 6px; padding: 12px 18px;
-      display: flex; justify-content: space-between; align-items: center;
-      margin-bottom: 16px; cursor: pointer;
-    }
-    .a-strip-text { font-size: 11px; color: rgba(255,255,255,0.65); }
-    .a-strip-action { font-size: 11px; color: #d4af62; font-weight: 500; }
-
-    .a-trust-row {
-      display: flex; gap: 0; border-top: 1px solid #e8e0d4;
-    }
-    .a-trust-item {
-      flex: 1; padding: 14px 12px; text-align: center;
-      border-right: 1px solid #e8e0d4;
-    }
-    .a-trust-item:last-child { border-right: none; }
-    .a-trust-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 22px; color: #1a3a4a; font-weight: 600;
-    }
-    .a-trust-sub { font-size: 10px; color: #9a8a72; margin-top: 2px; }
-
-    /* ══════════════════════════════
-       STYLE B — ULTRA MODERN
-    ══════════════════════════════ */
-    .mock-b { background: #0a0a0f; }
-
-    .b-hero {
-      background: #254260;
-      padding: 22px 22px 28px;
-      position: relative;
-      overflow: hidden;
-      min-height: 220px;
-    }
-    .b-glow-1 {
-      position: absolute; width: 280px; height: 280px; border-radius: 50%;
-      filter: blur(70px); background: rgba(99,102,241,0.4);
-      top: -80px; right: -60px; pointer-events: none;
-    }
-    .b-glow-2 {
-      position: absolute; width: 200px; height: 200px; border-radius: 50%;
-      filter: blur(60px); background: rgba(236,72,153,0.28);
-      bottom: -40px; left: 20px; pointer-events: none;
-    }
-    .b-nav {
-      display: flex; justify-content: space-between; align-items: center;
-      margin-bottom: 26px; position: relative; z-index: 1;
-    }
-    .b-logo {
-      font-family: 'Syne', sans-serif;
-      font-size: 17px; font-weight: 800; color: #fff; letter-spacing: 0.08em;
-    }
-    .b-logo span { color: #818cf8; }
-    .b-nav-pill {
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 20px; padding: 5px 14px;
-      font-size: 11px; color: rgba(255,255,255,0.65);
-    }
-
-    .b-eyebrow {
-      font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
-      color: #818cf8; margin-bottom: 8px; position: relative; z-index: 1;
-    }
-    .b-headline {
-      font-family: 'Syne', sans-serif;
-      font-size: 38px; font-weight: 800; color: #fff;
-      line-height: 1.1; position: relative; z-index: 1;
-    }
-    .b-headline span {
-      background: linear-gradient(90deg, #818cf8, #ec4899);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .b-sub {
-      font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 8px;
-      position: relative; z-index: 1; line-height: 1.6; max-width: 280px;
-    }
-
-    .b-cta-row {
-      display: flex; gap: 10px; margin-top: 20px; position: relative; z-index: 1;
-    }
-    .b-btn-primary {
-      background: linear-gradient(90deg, #818cf8, #a78bfa);
-      color: #fff; border: none;
-      padding: 10px 20px; border-radius: 24px;
-      font-size: 12px; font-weight: 500; letter-spacing: 0.06em;
-      cursor: pointer; font-family: 'DM Sans', sans-serif;
-    }
-    .b-btn-ghost {
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.14);
-      color: rgba(255,255,255,0.7);
-      padding: 10px 20px; border-radius: 24px;
-      font-size: 12px; cursor: pointer; font-family: 'DM Sans', sans-serif;
-    }
-
-    .b-dest-section { padding: 18px 22px 0; }
-
-    .b-section-label {
-      font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
-      color: rgba(255,255,255,0.28); margin-bottom: 12px;
-      display: flex; align-items: center; gap: 10px;
-    }
-    .b-section-label::after {
-      content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.07);
-    }
-
-    .b-dest-scroll {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
-      margin-bottom: 16px;
-    }
-    .b-dest-card {
-      border-radius: 10px; overflow: hidden; cursor: pointer;
-      border: 1px solid rgba(255,255,255,0.06);
-      transition: transform 0.2s;
-    }
-    .b-dest-card:hover { transform: translateY(-2px); }
-    .b-dest-visual {
-      height: 80px; display: flex; align-items: flex-end;
-      padding: 0 8px 7px; position: relative;
-    }
-    .b-dest-bali     { background: linear-gradient(160deg, #134e5e 0%, #71b280 100%); }
-    .b-dest-maldives { background: linear-gradient(160deg, #006994 0%, #00b4d8 100%); }
-    .b-dest-kyoto    { background: linear-gradient(160deg, #3d0008 0%, #c0392b 100%); }
-    .b-dest-tag {
-      background: rgba(0,0,0,0.45); border-radius: 4px;
-      padding: 3px 7px; font-size: 9px; color: rgba(255,255,255,0.9);
-    }
-    .b-dest-info { background: #111118; padding: 8px 10px; }
-    .b-dest-name  { font-size: 13px; font-weight: 500; color: #e2e8f0; }
-    .b-dest-price { font-size: 10px; color: #818cf8; margin-top: 2px; }
-
-    .b-packages {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
-      margin-bottom: 0;
-    }
-    .b-pkg {
-      background: #111118; border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 10px; padding: 14px;
-    }
-    .b-pkg.featured {
-      border-color: #818cf8;
-      background: linear-gradient(135deg, rgba(129,140,248,0.1) 0%, rgba(167,139,250,0.05) 100%);
-    }
-    .b-pkg-label {
-      font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase;
-      color: rgba(255,255,255,0.3); margin-bottom: 4px;
-    }
-    .b-pkg.featured .b-pkg-label { color: #818cf8; }
-    .b-pkg-name  { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; color: #e2e8f0; }
-    .b-pkg-price { font-size: 26px; font-weight: 700; color: #fff; font-family: 'Syne', sans-serif; margin-top: 2px; }
-    .b-pkg-price span { font-size: 13px; color: rgba(255,255,255,0.35); font-weight: 400; }
-    .b-pkg-feats { margin-top: 10px; }
-    .b-pkg-feat {
-      font-size: 11px; color: rgba(255,255,255,0.5); margin: 4px 0;
-      display: flex; align-items: center; gap: 6px;
-    }
-    .b-check {
-      width: 10px; height: 10px; border-radius: 50%;
-      background: #818cf8; flex-shrink: 0;
-    }
-    .b-pkg.featured .b-check { background: #a78bfa; }
-
-    .b-bottom-strip {
-      background: linear-gradient(90deg, rgba(129,140,248,0.14), rgba(236,72,153,0.08));
-      border-top: 1px solid rgba(129,140,248,0.18);
-      padding: 12px 22px; margin-top: 18px;
-      display: flex; justify-content: space-between; align-items: center;
-      cursor: pointer;
-    }
-    .b-strip-text  { font-size: 11px; color: rgba(255,255,255,0.55); }
-    .b-strip-arrow { font-size: 12px; color: #818cf8; font-weight: 600; }
-
-    /* ── LABELS ── */
-    .labels-row {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
-      max-width: 1000px; margin: 16px auto 0;
-    }
-    .label-name { font-size: 15px; font-weight: 500; color: #1a1a1a; margin-bottom: 6px; }
-    .badge-row  { display: flex; gap: 10px; align-items: center; }
-    .badge {
-      font-size: 11px; font-weight: 500; letter-spacing: 0.06em;
-      padding: 4px 10px; border-radius: 20px;
-    }
-    .badge-a { background: #e8f0e8; color: #2d5a2d; }
-    .badge-b { background: #e8e8f5; color: #3d3d8a; }
-    .opt-label { font-size: 12px; color: #999; }
-
-    .footer-note {
-      text-align: center; margin-top: 36px; padding: 20px 24px;
-      background: #eef2f7; border-radius: 14px;
-      max-width: 600px; margin-left: auto; margin-right: auto;
-    }
-    .footer-note p:first-child { font-size: 14px; color: #2a5080; font-weight: 500; }
-    .footer-note p:last-child  { font-size: 13px; color: #667; margin-top: 6px; line-height: 1.5; }
-
-    @media (max-width: 680px) {
-      .mockups-wrap, .labels-row { grid-template-columns: 1fr; }
-    }
-  </style>
-</head>
-<body>
-
-  <div class="page-title">
-    <p class="section-label">Design Concepts</p>
-    <h2>Two Style Ideas for Your Site</h2>
-    <p>These are previews of two design directions. We'll finalize your preferred look on our discovery call.</p>
-  </div>
-
-  <div class="mockups-wrap">
-
-    <!-- ══ STYLE A ══ -->
-    <div>
-      <div class="browser">
-        <div class="browser-bar">
-          <div class="dots">
-            <div class="dot" style="background:#ff5f57"></div>
-            <div class="dot" style="background:#ffbd2e"></div>
-            <div class="dot" style="background:#28c840"></div>
-          </div>
-          <div class="url-bar">yourtravelagency.com</div>
-        </div>
-        <div class="mock-a">
-          <div class="a-hero">
-            <div class="a-nav">
-              <span class="a-logo">✦ I Got You Travel Agency</span>
-              <div class="a-nav-links">
-                <span>Destinations</span>
-                <span>Experiences</span>
-                <span>About</span>
-              </div>
-            </div>
-            <div class="a-tagline">Est. 2026 · Luxury Curated Journeys</div>
-            <div class="a-headline">The World,<br/>on Your <em>Terms.</em></div>
-            <div class="a-sub">Private journeys designed around your vision. Bespoke, unhurried, unforgettable.</div>
-            <div class="a-hero-cta">Start Planning &rarr;</div>
-          </div>
-          <div class="a-dest-section">
-            <div class="a-section-label">Signature Destinations</div>
-            <div class="a-dest-grid">
-              <div class="a-dest-card">
-                <div class="a-dest-img a-dest-santorini">🏛️</div>
-                <div class="a-dest-info">
-                  <div class="a-dest-name">Santorini</div>
-                  <div class="a-dest-price">from $4,200</div>
-                </div>
-              </div>
-              <div class="a-dest-card">
-                <div class="a-dest-img a-dest-amalfi">⛵</div>
-                <div class="a-dest-info">
-                  <div class="a-dest-name">Amalfi Coast</div>
-                  <div class="a-dest-price">from $3,800</div>
-                </div>
-              </div>
-              <div class="a-dest-card">
-                <div class="a-dest-img a-dest-dubai">🌴</div>
-                <div class="a-dest-info">
-                  <div class="a-dest-name">Dubai</div>
-                  <div class="a-dest-price">from $2,900</div>
-                </div>
-              </div>
-            </div>
-            <div class="a-strip">
-              <div class="a-strip-text">✉ Free concierge consultation · No obligations</div>
-              <div class="a-strip-action">Book a call →</div>
-            </div>
-            <div class="a-trust-row">
-              <div class="a-trust-item">
-                <div class="a-trust-num">2,400+</div>
-                <div class="a-trust-sub">Happy Travelers</div>
-              </div>
-              <div class="a-trust-item">
-                <div class="a-trust-num">15yr</div>
-                <div class="a-trust-sub">Experience</div>
-              </div>
-              <div class="a-trust-item">
-                <div class="a-trust-num">98%</div>
-                <div class="a-trust-sub">Return Rate</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ══ STYLE B ══ -->
-    <div>
-      <div class="browser">
-        <div class="browser-bar">
-          <div class="dots">
-            <div class="dot" style="background:#ff5f57"></div>
-            <div class="dot" style="background:#ffbd2e"></div>
-            <div class="dot" style="background:#28c840"></div>
-          </div>
-          <div class="url-bar">yourtravelagency.com</div>
-        </div>
-        <div class="mock-b">
-          <div class="b-hero">
-            <div class="b-glow-1"></div>
-            <div class="b-glow-2"></div>
-            <div class="b-nav">
-              <div class="b-logo">B & L<span>.</span></div>
-              <div class="b-nav-pill">✈ 3 spots left this month</div>
-            </div>
-            <div class="b-eyebrow">// Next-gen travel curation</div>
-            <div class="b-headline">See the World<br/><span>Differently.</span></div>
-            <div class="b-sub">AI matched itineraries. Expert human touch. Zero guesswork.</div>
-            <div class="b-cta-row">
-              <button class="b-btn-primary">Get matched →</button>
-              <button class="b-btn-ghost">View packages</button>
-            </div>
-          </div>
-          <div class="b-dest-section">
-            <div class="b-section-label">Trending now</div>
-            <div class="b-dest-scroll">
-              <div class="b-dest-card">
-                <div class="b-dest-visual b-dest-bali">
-                  <div class="b-dest-tag">Trending</div>
-                </div>
-                <div class="b-dest-info">
-                  <div class="b-dest-name">Bali</div>
-                  
-                  <div class="b-dest-price">from $2,100</div>
-                </div>
-              </div>
-              <div class="b-dest-card">
-                <div class="b-dest-visual b-dest-maldives">
-                  <div class="b-dest-tag">Exclusive</div>
-                </div>
-                <div class="b-dest-info">
-                  <div class="b-dest-name">Maldives</div>
-                  <div class="b-dest-price">from $5,400</div>
-                </div>
-              </div>
-              <div class="b-dest-card">
-                <div class="b-dest-visual b-dest-kyoto">
-                  <div class="b-dest-tag">New</div>
-                </div>
-                <div class="b-dest-info">
-                  <div class="b-dest-name">Kyoto</div>
-                  <div class="b-dest-price">from $3,200</div>
-                </div>
-              </div>
-            </div>
-            <div class="b-section-label">Choose your tier</div>
-            <div class="b-packages">
-              <div class="b-pkg">
-                <div class="b-pkg-label">Explorer</div>
-                <div class="b-pkg-name">Wanderer</div>
-                <div class="b-pkg-price">$1,499<span>/trip</span></div>
-                <div class="b-pkg-feats">
-                  <div class="b-pkg-feat"><div class="b-check"></div>3 destinations</div>
-                  <div class="b-pkg-feat"><div class="b-check"></div>Hotel curated</div>
-                  <div class="b-pkg-feat"><div class="b-check"></div>24/7 support</div>
-                </div>
-              </div>
-              <div class="b-pkg featured">
-                <div class="b-pkg-label">Most popular</div>
-                <div class="b-pkg-name">Voyager</div>
-                <div class="b-pkg-price">$2,999<span>/trip</span></div>
-                <div class="b-pkg-feats">
-                  <div class="b-pkg-feat"><div class="b-check"></div>Unlimited stops</div>
-                  <div class="b-pkg-feat"><div class="b-check"></div>Private transfers</div>
-                  <div class="b-pkg-feat"><div class="b-check"></div>Concierge access</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="b-bottom-strip">
-            <div class="b-strip-text">Free 20-min strategy call with your travel advisor</div>
-            <div class="b-strip-arrow">Book now →</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="labels-row">
-    <div>
-      <div class="label-name">Style A — Riviera Luxury</div>
-      <div class="badge-row">
-        <span class="badge badge-a">Sky Blue · Serif · Timeless</span>
-        <!-- // add image in background -->
-        <span class="opt-label">Option 1</span>
-      </div>
-    </div>
-    <div>
-      <div class="label-name">Style B — Ultra Modern</div>
-      <div class="badge-row">
-        <span class="badge badge-b">Dark Mode · Indigo Glow · Bold</span>
-        <span class="opt-label">Option 2</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="footer-note">
-    <p>💡 These are just starting points</p>
-    <p>Your final site will be custom designed to match your brand, colors, logo, and personality. We'll decide everything together on our discovery call.</p>
-  </div>
-
-</body>
-</html>
-
-
-
-
-<!-- <section id="examples">
-  <div class="examples-intro">
-    <div>
-      <p class="section-label">Design Concepts</p>
-      <h2 class="section-title">Two Style Ideas for Your Site</h2>
-    </div>
-    <p class="section-sub" style="max-width:360px">These are previews of two design directions. We'll finalize your preferred look on our discovery call.</p>
-  </div>
-  <div class="mockup-wrapper">
-    <div>
-      <div class="mockup-card">
-        <div class="mockup-bar">
-          <div class="mockup-dot" style="background:#ff5f57"></div>
-          <div class="mockup-dot" style="background:#ffbd2e"></div>
-          <div class="mockup-dot" style="background:#28c840"></div>
-          <div class="url">www.yourtravelagency.com</div>
-        </div>
-        <div class="mock-a">
-          <div class="mock-a-hero">
-            <div class="mock-a-nav">
-              <span style="font-family:'Playfair Display',serif;font-weight:700">🌊 Coastal Escapes</span>
-              <span style="background:rgba(255,255,255,0.2);padding:4px 10px;border-radius:20px;font-size:0.6rem">Book Now</span>
-            </div>
-            <h2>Luxury Travel,<br/>Personally Crafted</h2>
-            <p>Your expert guide to unforgettable journeys</p>
-          </div>
-          <div class="mock-a-body">
-            <p style="font-size:0.65rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:#6b8fa8;margin-bottom:10px">Featured Destinations</p>
-            <div class="mock-a-row">
-              <div class="mock-dest"><div class="dest-img">🏝️</div><div class="dest-name">Maldives</div><div class="dest-price">from $3,200</div></div>
-              <div class="mock-dest"><div class="dest-img">🗼</div><div class="dest-name">Paris</div><div class="dest-price">from $1,800</div></div>
-              <div class="mock-dest"><div class="dest-img">🌺</div><div class="dest-name">Bali</div><div class="dest-price">from $2,100</div></div>
-            </div>
-            <div class="mock-a-cta">✉️ Request Your Free Consultation →</div>
-          </div>
-        </div>
-      </div>
-      <div class="mockup-label">
-        <div><h4>Style A — Coastal Elegance</h4><div><span class="mockup-badge badge-coastal">Soft Blues · Classic · Trustworthy</span></div></div>
-        <span>Option 1</span>
-      </div>
-    </div>
-    <div>
-      <div class="mockup-card">
-        <div class="mockup-bar">
-          <div class="mockup-dot" style="background:#ff5f57"></div>
-          <div class="mockup-dot" style="background:#ffbd2e"></div>
-          <div class="mockup-dot" style="background:#28c840"></div>
-          <div class="url">www.yourtravelagency.com</div>
-        </div>
-        <div class="mock-b">
-          <div class="mock-b-hero">
-            <div class="mock-b-nav">
-              <span class="logo">✦ AZURE TRAVEL</span>
-              <div class="menu"><span></span><span></span><span></span></div>
-            </div>
-            <h2>Where Will <span>Your Story</span><br/>Take You Next?</h2>
-            <p>Expert travel curation for discerning explorers</p>
-            <span class="mock-b-btn">Explore Packages ✈️</span>
-          </div>
-          <div class="mock-b-body">
-            <p style="font-size:0.6rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#6b8fa8;margin-bottom:10px">All Year Access Flying Packages</p>
-            <div class="mock-b-cards">
-              <div class="mock-b-pkg"><div class="pkg-name">Travel Starter</div><div class="pkg-price">$1,200</div><div class="pkg-desc">Perfect for solo flying</div></div>
-              <div class="mock-b-pkg featured"><div class="pkg-name">Pro Traveler</div><div class="pkg-price">$1,800</div><div class="pkg-desc">All access pass</div></div>
-            </div>
-            <div class="mock-b-strip"><span>📞 Book a free discovery call</span><span class="arrow">→</span></div>
-          </div>
-        </div>
-      </div>
-      <div class="mockup-label">
-        <div><h4>Style B — Modern Bold</h4><div><span class="mockup-badge badge-modern">Deep Navy · Bold · Sophisticated</span></div></div>
-        <span>Option 2</span>
-      </div>
-    </div>
-  </div>
-  <div style="text-align:center;margin-top:36px;padding:20px;background:var(--sky);border-radius:16px;max-width:600px;margin-left:auto;margin-right:auto">
-    <p style="font-size:0.9rem;color:var(--ocean);font-weight:600">💡 These are just starting points</p>
-    <p style="font-size:0.85rem;color:var(--muted);margin-top:4px">Your final site will be custom designed to match your brand, colors, logo, and personality. We'll decide everything together on our discovery call.</p>
-  </div>
-</section> -->
-
-
-<!-- ===================== PACKAGES ===================== -->
-<section id="packages">
-  <div class="text-center">
-    <p class="section-label">Transparent Pricing</p>
-    <h2 class="section-title">Choose Your Package</h2>
-    <p class="section-sub">Simple, clear pricing. No hidden fees. See exactly what's included and what isn't before you commit to a single dollar.</p>
-  </div>
-
-  <div class="pkg-cards-wrap">
-
-    <!-- ── LAUNCH ── -->
-    <div class="pc">
-      <div class="pc-header">
-        <div class="pc-tier">Launch</div>
-        <div class="pc-price">$1,500</div>
-        <div class="pc-tagline">Perfect for new or solo agents who need a clean, professional online presence.</div>
-        <div class="pc-meta">
-          <span class="pc-meta-pill">⏱ 2–3 weeks</span>
-          <span class="pc-meta-pill">🔄 2 revisions</span>
-          <span class="pc-meta-pill">🛟 30-day support</span>
-        </div>
-      </div>
-
-      <div class="pc-features">
-        <div class="pc-feat">
-          <div class="pc-feat-icon icon-yes">✓</div>
-          <div class="pc-feat-text">
-            <span class="pc-feat-label">Custom 1-page website</span>
-            <span class="pc-feat-note">White &amp; blue branded design</span>
-          </div>
-        </div>
-        <div class="pc-feat">
-          <div class="pc-feat-icon icon-yes">✓</div>
-          <div class="pc-feat-text">
-            <span class="pc-feat-label">Mobile optimized design</span>
-            <span class="pc-feat-note">Looks great on all devices</span>
-          </div>
-        </div>
-        <div class="pc-feat">
-          <div class="pc-feat-icon icon-yes">✓</div>
-          <div class="pc-feat-text">
-            <span class="pc-feat-label">Booking / contact form</span>
-            <span class="pc-feat-note">Email inquiry form</span>
-          </div>
-        </div>
-        <div class="pc-feat">
-          <div class="pc-feat-icon icon-yes">✓</div>
-          <div class="pc-feat-text">
-            <span class="pc-feat-label">Up to 3 certifications displayed</span>
-            <span class="pc-feat-note">CLIA, IATAN, supplier certs</span>
-          </div>
-        </div>
-        <div class="pc-feat">
-          <div class="pc-feat-icon icon-yes">✓</div>
-          <div class="pc-feat-text">
-            <span class="pc-feat-label">Basic SEO setup</span>
-            <span class="pc-feat-note">Meta tags, titles, descriptions</span>
-          </div>
-        </div>
-        <div class="pc-feat">
-          <div class="pc-feat-icon icon-no">✗</div>
-          <div class="pc-feat-text">
-            <span class="pc-feat-label dimmed">Admin Dashboard</span>
-          </div>
-        </div>
-        <div class="pc-feat">
-          <div class="pc-feat-icon icon-no">✗</div>
-          <div class="pc-feat-text">
-            <span class="pc-feat-label dimmed">Analytics Setup</span>
-          </div>
-        </div>
-        <div class="pc-feat">
-          <div class="pc-feat-icon icon-no">✗</div>
-          <div class="pc-feat-text">
-            <span class="pc-feat-label dimmed">Domain &amp; Hosting Setup</span>
-          </div>
-        </div>
-        <div class="pc-feat">
-          <div class="pc-feat-icon icon-no">✗</div>
-          <div class="pc-feat-text">
-            <span class="pc-feat-label dimmed">Ongoing Maintenance</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="pc-footer">
-        <button class="pc-btn pc-btn-default" onclick="scrollTo('contact')">Get Started →</button>
-      </div>
-    </div>
-
-    <!-- ── GROWTH (POPULAR) ── -->
-    <div class="pc pc-popular">
-      <div class="pc-badge">⭐ Most Popular</div>
-      <div class="pc-header">
-        <div class="pc-tier">Growth</div>
-        <div class="pc-price">$2,000</div>
-        <div class="pc-tagline">Best for agencies ready to attract more clients and grow consistently.</div>
-        <div class="pc-meta">
-          <span class="pc-meta-pill">⏱ 3–4 weeks</span>
-          <span class="pc-meta-pill">🔄 3 revisions</span>
-          <span class="pc-meta-pill">🛟 60-day support</span>
-        </div>
-      </div>
-
-      <div class="pc-features">
-        <div class="pc-feat">
-          <div class="pc-feat-icon icon-yes-pop">✓</div>
-          <div class="pc-feat-text">
-            <span class="pc-feat-label">Multi-page website</span>
-            <span class="pc-feat-note note-pop">Home, destinations, about &amp; more</span>
-          </div>
-        </div>
-        <div class="pc-feat">
-          <div class="pc-feat-icon icon-yes-pop">✓</div>
-          <div class="pc-feat-text">
-            <span class="pc-feat-label">Mobile optimized design</span>
-            <span class="pc-feat-note note-pop">Looks great on all devices</span>
-          </div>
-        </div>
-        <div class="pc-feat">
-          <div class="pc-feat-icon icon-yes-pop">✓</div>
-          <div class="pc-feat-text">
-            <span class="pc-feat-label">Booking form + calendar integration</span>
-            <span class="pc-feat-note note-pop">Email + calendar sync</span>
-          </div>
-        </div>
-        <div class="pc-feat">
-          <div class="pc-feat-icon icon-yes-pop">✓</div>
-          <div class="pc-feat-text">
-            <span class="pc-feat-label">Unlimited certifications</span>
-            <span class="pc-feat-note note-pop">All your credentials displayed</span>
-          </div>
-        </div>
-        <div class="pc-feat">
-          <div class="pc-feat-icon icon-yes-pop">✓</div>
-          <div class="pc-feat-text">
-            <span class="pc-feat-label">Analytics setup</span>
-            <span class="pc-feat-note note-pop">Track your traffic &amp; conversions</span>
-          </div>
-        </div>
-        <div class="pc-feat">
-          <div class="pc-feat-icon icon-yes-pop">✓</div>
-          <div class="pc-feat-text">
-            <span class="pc-feat-label">Admin dashboard</span>
-            <span class="pc-feat-note note-pop">Manage content anytime yourself</span>
-          </div>
-        </div>
-        <div class="pc-feat">
-          <div class="pc-feat-icon icon-no">✗</div>
-          <div class="pc-feat-text">
-            <span class="pc-feat-label dimmed">Domain &amp; Hosting Setup</span>
-          </div>
-        </div>
-        <div class="pc-feat">
-          <div class="pc-feat-icon icon-no">✗</div>
-          <div class="pc-feat-text">
-            <span class="pc-feat-label dimmed">Ongoing Maintenance</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="pc-footer">
-        <button class="pc-btn pc-btn-featured" onclick="scrollTo('contact')">Get This Package →</button>
-      </div>
-    </div>
-
-    <!-- ── AUTHORITY ── -->
-    <div class="pc">
-      <div class="pc-header">
-        <div class="pc-tier">Authority</div>
-        <div class="pc-price">$2,500</div>
-        <div class="pc-tagline">Perfect if you want everything handled so you can focus on selling travel.</div>
-        <div class="pc-meta">
-          <span class="pc-meta-pill">⏱ 4–5 weeks</span>
-          <span class="pc-meta-pill">🔄 Unlimited</span>
-          <span class="pc-meta-pill">🛟 90-day support</span>
-        </div>
-      </div>
-
-      <div class="pc-features">
-        <div class="pc-feat">
-          <div class="pc-feat-icon icon-yes">✓</div>
-          <div class="pc-feat-text">
-            <span class="pc-feat-label">Everything in Growth</span>
-            <span class="pc-feat-note">All Growth features included</span>
-          </div>
-        </div>
-        <div class="pc-feat">
-          <div class="pc-feat-icon icon-yes">✓</div>
-          <div class="pc-feat-text">
-            <span class="pc-feat-label">Full CMS</span>
-            <span class="pc-feat-note">Edit your entire site anytime</span>
-          </div>
-        </div>
-        <div class="pc-feat">
-          <div class="pc-feat-icon icon-yes">✓</div>
-          <div class="pc-feat-text">
-            <span class="pc-feat-label">Automated email replies</span>
-            <span class="pc-feat-note">Auto-response to every inquiry</span>
-          </div>
-        </div>
-        <div class="pc-feat">
-          <div class="pc-feat-icon icon-yes">✓</div>
-          <div class="pc-feat-text">
-            <span class="pc-feat-label">Domain &amp; hosting setup</span>
-            <span class="pc-feat-note">1 year included, fully configured</span>
-          </div>
-        </div>
-        <div class="pc-feat">
-          <div class="pc-feat-icon icon-yes">✓</div>
-          <div class="pc-feat-text">
-            <span class="pc-feat-label">3 months maintenance &amp; support</span>
-            <span class="pc-feat-note">Security, updates &amp; content tweaks</span>
-          </div>
-        </div>
-        <div class="pc-feat">
-          <div class="pc-feat-icon icon-yes">✓</div>
-          <div class="pc-feat-text">
-            <span class="pc-feat-label">Analytics setup</span>
-            <span class="pc-feat-note">Full reporting dashboard</span>
-          </div>
-        </div>
-        <div class="pc-feat">
-          <div class="pc-feat-icon icon-yes">✓</div>
-          <div class="pc-feat-text">
-            <span class="pc-feat-label">Admin dashboard</span>
-            <span class="pc-feat-note">Full CMS — update anything</span>
-          </div>
-        </div>
-        <div class="pc-feat">
-          <div class="pc-feat-icon icon-yes">✓</div>
-          <div class="pc-feat-text">
-            <span class="pc-feat-label">Unlimited certifications</span>
-            <span class="pc-feat-note">All credentials beautifully displayed</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="pc-footer">
-        <button class="pc-btn pc-btn-default" onclick="scrollTo('contact')">Get Started →</button>
-      </div>
-    </div>
-
-  </div><!-- /pkg-cards-wrap -->
-
-  <!-- TRUST STRIP -->
-  <div class="trust-strip">
-    <div class="trust-item">
-      <div class="trust-icon">💳</div>
-      <div><h4>50 / 50 Payment Split</h4><p>Half upfront, half at launch. No risk.</p></div>
-    </div>
-    <div class="trust-item">
-      <div class="trust-icon">📋</div>
-      <div><h4>Clear Scope Agreement</h4><p>You'll know exactly what you're getting before paying.</p></div>
-    </div>
-    <div class="trust-item">
-      <div class="trust-icon">⏰</div>
-      <div><h4>Realistic Timelines</h4><p>No rushing. Time built in for revisions and feedback.</p></div>
-    </div>
-    <div class="trust-item">
-      <div class="trust-icon">🔑</div>
-      <div><h4>You Own Everything</h4><p>Your domain, your code, your business is fully yours.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- PROCESS -->
-<section id="process">
-  <div class="text-center">
-    <p class="section-label">How It Works</p>
-    <h2 class="section-title">From Zero to Launch — Step by Step</h2>
-    <p class="section-sub">No guesswork. Here's exactly what happens after you say yes.</p>
-  </div>
-  <div class="process-grid" style="margin-top:60px">
-    <div class="process-step">
-      <div class="process-num">1</div>
-      <div class="process-week">Day 1–2</div>
-      <h4>Discovery Call</h4>
-      <p>We talk about your agency, your goals, your style. You get a full scope document to approve.</p>
-    </div>
-    <div class="process-step">
-      <div class="process-num">2</div>
-      <div class="process-week">Week 1</div>
-      <h4>Design Mockup</h4>
-      <p>You see your site's look before a single line of code is written. Revisions welcome.</p>
-    </div>
-    <div class="process-step">
-      <div class="process-num">3</div>
-      <div class="process-week">Week 2–4</div>
-      <h4>Build &amp; Content</h4>
-      <p>Your site is built, your photos and copy go in, and everything is tested on all devices.</p>
-    </div>
-    <div class="process-step">
-      <div class="process-num">4</div>
-      <div class="process-week">Week 5+</div>
-      <h4>Launch &amp; Handoff</h4>
-      <p>Domain live, analytics tracking, and a walkthrough video so you know how to manage everything.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section id="about">
-  <div class="about-layout">
-    <div class="about-visual">
-      <div class="about-card-main">
-        <div class="about-avatar-row">
-          <div class="about-avatar">👩‍💻</div>
-          <div>
-            <div class="about-avatar-name">Your Web Developer</div>
-            <div class="about-avatar-role">Jessi · MERN Stack</div>
-          </div>
-        </div>
-        <blockquote>
-          "I build tools that help you as a travel agent compete, get found, and close more bookings."
-        </blockquote>
-        <div class="about-chips">
-          <span class="chip">MERN Stack</span>
-          <span class="chip">Tailwind CSS</span>
-          <span class="chip">SEO-First</span>
-          <span class="chip">Mobile-First</span>
-          <span class="chip">Happy Delivery</span>
-        </div>
-      </div>
-      <div class="about-stats-row">
-        <div class="about-stat-box"><div class="stat-num">100%</div><div class="stat-lbl">On-Time Delivery</div></div>
-        <div class="about-stat-box"><div class="stat-num">5★</div><div class="stat-lbl">Professional Work</div></div>
-        <div class="about-stat-box"><div class="stat-num">2–5</div><div class="stat-lbl">Weeks to Launch</div></div>
-      </div>
-    </div>
-    <div class="about-content">
-      <p class="section-label">Why Work With Me</p>
-      <h2 class="section-title">I'm Invested in<br/>Your Success</h2>
-      <p class="about-lead">This isn't a template you're buying. Every site is custom designed from scratch for your agency built to convert visitors into paying clients.</p>
-      <ul class="about-list">
-        <li>
-          <div class="about-check-icon">✓</div>
-          <div class="about-list-text"><strong>No radio silence</strong><span>Regular progress updates throughout — always know where things stand.</span></div>
-        </li>
-        <li>
-          <div class="about-check-icon">✓</div>
-          <div class="about-list-text"><strong>Revisions included</strong><span>We get it right before going live. Your feedback shapes every decision.</span></div>
-        </li>
-        <li>
-          <div class="about-check-icon">✓</div>
-          <div class="about-list-text"><strong>Plain language, always</strong><span>No confusing tech jargon. I explain everything clearly so you feel in control.</span></div>
-        </li>
-        <li>
-          <div class="about-check-icon">✓</div>
-          <div class="about-list-text"><strong>You stay in control</strong><span>After launch you can make simple updates yourself — no developer dependency.</span></div>
-        </li>
-        <li>
-          <div class="about-check-icon">✓</div>
-          <div class="about-list-text"><strong>Post-launch support</strong><span>I don't disappear after launch. I'm available if anything needs adjusting.</span></div>
-        </li>
-      </ul>
-      <!-- <div class="about-cta-row">
-        <button class="about-cta-btn" onclick="scrollTo('contact')">Let's Work Together →</button>
-        <span class="about-cta-note">Free discovery call · <strong>No commitment</strong></span>
-      </div> -->
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="contact-layout">
-    <div class="contact-info">
-      <p class="section-label" style="color:#7dd3fc">Ready to Get Started?</p>
-      <h2 class="section-title">Let's Build Your Dream Travel Site</h2>
-      <p>Fill out the form and I'll get back to you within 24 hours to schedule a free 30-minute discovery call. No payment, no commitment just a conversation.</p>
-      <ul class="contact-perks">
-        <li><span class="perk-icon">🗓️</span> Free 30-min discovery call</li>
-        <li><span class="perk-icon">📄</span> Written quote provided before any payment</li>
-        <li><span class="perk-icon">✅</span> No pressure just clarity on what you'd get</li>
-        <li><span class="perk-icon">⚡</span> Can start in days</li>
-      </ul>
-    </div>
-    <div class="contact-form">
-      <h3>📬 Send Me a Message</h3>
-      <form id="contactForm">
-        <div class="form-row">
-          <div class="form-group">
-            <label>Your Name</label>
-            <input type="text" placeholder="e.g. Maria Lopez" required/>
-          </div>
-          <div class="form-group">
-            <label>Email Address</label>
-            <input type="email" placeholder="maria@youragency.com" required/>
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Agency Name</label>
-          <input type="text" placeholder="Sunset Vacations Travel Co."/>
-        </div>
-        <div class="form-group">
-          <label>Interested Package</label>
-          <select>
-            <option value="">Select a package...</option>
-            <option>Launch — $1,500</option>
-            <option>Growth — $2,000</option>
-            <option>Authority — $2,500</option>
-            <option>Not sure yet — let's talk</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Tell Me About Your Agency</label>
-          <textarea placeholder="What kind of travel do you specialize in? What's missing from your current online presence?"></textarea>
-        </div>
-        <button type="submit" class="form-submit">Send Message &amp; Book Free Call →</button>
-        <p class="form-note">🔒 No spam. No obligation. Response within 24 hours.</p>
-      </form>
-      <div class="success-msg" id="successMsg">
-        <p>🎉 Message received! I'll be in touch within 24 hours to schedule your free call. Exciting things ahead!</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <p>✨ Programmed with care <strong>Made For Pro Travel Agents</strong> · Custom website platforms for travel agent businesses · © 2026</p>
-  <p style="margin-top:6px;font-size:0.75rem">Questions? Reply to my email or fill out the form above.</p>
-</footer>
-
-<script>
-  window.addEventListener('scroll', () => {
-    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
-  });
-
-  function toggleMenu() {
-    document.getElementById('navLinks').classList.toggle('open');
-  }
-
-  function scrollTo(id) {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    document.getElementById('navLinks').classList.remove('open');
-  }
-
-  const container = document.getElementById('bubbles');
-  for (let i = 0; i < 12; i++) {
-    const b = document.createElement('div');
-    b.className = 'bubble';
-    const size = 30 + Math.random() * 80;
-    b.style.cssText = `width:${size}px;height:${size}px;left:${Math.random()*100}%;top:${20+Math.random()*70}%;animation-duration:${5+Math.random()*8}s;animation-delay:${Math.random()*5}s;`;
-    container.appendChild(b);
-  }
-
-  document.getElementById('contactForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const data = {
-      name: form.querySelectorAll('input[type="text"]')[0].value,
-      email: form.querySelector('input[type="email"]').value,
-      agency: form.querySelectorAll('input[type="text"]')[1].value,
-      package: form.querySelector('select').value,
-      message: form.querySelector('textarea').value
-    };
-    const res = await fetch('https://formspree.io/f/xjgjzrbb', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    });
-    if (res.ok) {
-      document.getElementById('contactForm').style.display = 'none';
-      document.getElementById('successMsg').classList.add('show');
-    } else {
-      alert('Something went wrong. Please try again!');
-    }
-  });
-
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      e.preventDefault();
-      const id = a.getAttribute('href').slice(1);
-      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-      document.getElementById('navLinks').classList.remove('open');
-    });
-  });
-</script>
-</body>
-</html> 
